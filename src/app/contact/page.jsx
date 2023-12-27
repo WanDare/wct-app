@@ -57,8 +57,8 @@ const posts = [
 
 export default function contact() {
   return (
-    <>
-    <Navbar />
+    <div>
+      <Navbar />
       <div className="bg-white py-24 sm:py-32">
         <div className="mx-auto max-w-7xl px-6 lg:px-8">
           <div className="mx-auto max-w-2xl lg:mx-0">
@@ -119,6 +119,6 @@ export default function contact() {
         </div>
       </div>
       <Footer />
-    </>
+    </div>
   );
 }

@@ -30,8 +30,8 @@ const people = [
 
 export default function About() {
   return (
-    <>
-    <Navbar />
+    <div>
+      <Navbar />
       <div className="bg-white py-24 sm:py-32">
         <div className="mx-auto grid max-w-7xl gap-x-8 gap-y-20 px-6 lg:px-8 xl:grid-cols-3">
           <div className="max-w-2xl">
@@ -70,6 +70,6 @@ export default function About() {
         </div>
       </div>
       <Footer />
-    </>
+    </div>
   );
 }
