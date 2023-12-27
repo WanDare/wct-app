@@ -1,4 +1,5 @@
 import React from "react";
+import { useRouter } from "next/navigation";
 
 const EndWidget = [
   {
@@ -8,6 +9,11 @@ const EndWidget = [
 ];
 
 const Endfooter = () => {
+  const router = useRouter();
+  const onClickPage = (pathname) => {
+    router.push(pathname);
+  };
+
   return (
     <div>
       <ul role="list" className="">
@@ -26,7 +32,10 @@ const Endfooter = () => {
                 <h3 className="text-3xl leading-7 tracking-tight text-white pb-7">
                   {EndWidget.event}
                 </h3>
-                <button className="flex-initial w-32 bg-blue-500 p-3 rounded-lg drop-shadow-2xl text-white hover:bg-blue-600">
+                <button
+                  className="flex-initial w-32 bg-blue-500 p-3 rounded-lg drop-shadow-2xl text-white hover:bg-blue-600"
+                  onClick={() => onClickPage("/post_page")}
+                >
                   Post event
                 </button>
               </div>
