@@ -149,7 +149,7 @@ export default function Postevent() {
             </select>
           </label>
 
-          <button className="btn btn-success mt-4" onClick={handleUpload}>
+          <button className="btn btn-success text-white mt-4" onClick={handleUpload}>
             Upload
           </button>
         </div>

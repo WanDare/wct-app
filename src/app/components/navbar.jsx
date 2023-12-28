@@ -119,7 +119,7 @@ const Navbar = (isHomepage) => {
                 <li>
                   <button
                     className="hover:text-black"
-                    onClick={() => onClickPage("/discovery")}
+                    onClick={() => onClickPage("/search_area")}
                   >
                     Discovery
                   </button>
