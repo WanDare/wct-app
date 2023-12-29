@@ -10,3 +10,33 @@ export async function fetchUserData() {
   });
   return data;
 }
+
+export async function fetchEventData() {
+  const querySnapshot = await getDocs(collection(db, "feature_detail"));
+
+  const data = [];
+  querySnapshot.forEach((doc) => {
+    data.push({ id: doc.id, ...doc.data() });
+  });
+  return data;
+}
+
+export async function fetchMostlikeData() {
+  const querySnapshot = await getDocs(collection(db, "mostlike_detail"));
+
+  const data = [];
+  querySnapshot.forEach((doc) => {
+    data.push({ id: doc.id, ...doc.data() });
+  });
+  return data;
+}
+
+export async function fetchRecentData() {
+  const querySnapshot = await getDocs(collection(db, "recent_detail"));
+
+  const data = [];
+  querySnapshot.forEach((doc) => {
+    data.push({ id: doc.id, ...doc.data() });
+  });
+  return data;
+}
