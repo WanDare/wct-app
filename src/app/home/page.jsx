@@ -1,11 +1,15 @@
+"use client";
 import React from "react";
-import { Post } from "../components/post";
-import Search from "../components/search";
+import { useRouter } from "next/navigation";
 
 const Home = () => {
+  const router = useRouter();
+  const onClickPage = (pathname) => {
+    router.push(pathname);
+  };
   return (
     <div>
-      <Search />
+      <button onClick={() => onClickPage("/search")}>search page</button>
     </div>
   );
 };

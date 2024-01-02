@@ -57,7 +57,7 @@ function ResultCard() {
             Scroll along the beach take a break enjoy the food
           </p>
 
-          <button className={style.btn} onClick={() => onClickPage("/contact")}>
+          <button className={style.btn} onClick={() => onClickPage("/post")}>
             See Detail
           </button>
           <div className={style.badge}>Free</div>

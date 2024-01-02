@@ -1,6 +1,7 @@
 "use client";
 import React, { useState } from "react";
-import Navbar from "./navbar";
+import Navbar from "../components/navbar";
+import Footer from "../components/footer";
 
 const style = {
   container: `bg-[#F2F2F2] w-4/12 flex flex-col items-center rounded-lg p-5 mt-10`,
@@ -8,7 +9,7 @@ const style = {
   previewImage: `w-20 h-20 object-cover mr-2 mb-2 rounded`,
 };
 
-export const Post = () => {
+export default function Post() {
   const [eventTitle, setEventTitle] = useState("");
   const [eventLocation, setEventLocation] = useState("");
   const [eventDescription, setEventDescription] = useState("");
@@ -154,6 +155,7 @@ export const Post = () => {
           </button>
         </div>
       </div>
+      <Footer />
     </div>
   );
-};
+}
