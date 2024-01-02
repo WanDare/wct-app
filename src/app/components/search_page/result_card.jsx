@@ -3,11 +3,12 @@ import React from "react";
 import { useRouter } from "next/navigation";
 
 const style = {
-  container: `flex flex-col mx-4 lg:mx-20 mt-5 border rounded-md bg-white shadow-lg`,
-  secondContainer: `flex flex-col lg:flex-row p-4`,
+  container: `flex flex-col mx-4 lg:mx-20 mt-5 border rounded-md bg-white shadow-lg `,
+  secondContainer: `flex flex-col lg:flex-row p-4 `,
   img: `w-full lg:w-4/12 rounded-md lg:mr-4`,
-  content: `mt-4 lg:mt-0 lg:ml-4`,
+  content: `mt-4 lg:mt-0 lg:ml-4 `,
   btn: `btn btn-outline btn-info mt-4 lg:mt-20`,
+  badge: `badge sm:ml-[450px] md:ml-[550px] lg:ml-[700px] `,
 };
 
 function ResultCard() {
@@ -55,12 +56,11 @@ function ResultCard() {
           <p className="mt-2 lg:mt-4">
             Scroll along the beach take a break enjoy the food
           </p>
-          <button
-            className={style.btn}
-            onClick={() => onClickPage("/discovery")}
-          >
+
+          <button className={style.btn} onClick={() => onClickPage("/contact")}>
             See Detail
           </button>
+          <div className={style.badge}>Free</div>
         </div>
       </div>
     </div>

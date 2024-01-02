@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import Navbar from "./navbar";
 
 const style = {
-  container: `bg-customGrey w-3/12 flex flex-col items-center rounded-lg p-5`,
+  container: `bg-[#F2F2F2] w-4/12 flex flex-col items-center rounded-lg p-5 mt-10`,
   previewContainer: `mt-4`,
   previewImage: `w-20 h-20 object-cover mr-2 mb-2 rounded`,
 };
@@ -70,7 +70,7 @@ export const Post = () => {
             </div>
             <textarea
               placeholder="Type here"
-              className="textarea textarea-bordered textarea-md w-full max-w-xs"
+              className="textarea textarea-bordered textarea-md w-full max-w-lg"
               value={eventDescription}
               onChange={handleDescriptionChange}
             ></textarea>
