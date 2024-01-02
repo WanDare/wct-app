@@ -143,10 +143,16 @@ const NavbarSearch = (isHomepage) => {
 
           {/* Register and Sign In Buttons */}
           <div className="flex flex-row lg:flex">
-            <button className="text-blue-500 font-normal bg-transparent border border-blue-500 px-4 rounded-md transition duration-300 ease-in-out hover:bg-blue-600 hover:border-blue-600 hover:text-white">
+            <button
+              className="text-blue-500 font-normal bg-transparent border border-blue-500 px-4 rounded-md transition duration-300 ease-in-out hover:bg-blue-600 hover:border-blue-600 hover:text-white"
+              onClick={() => onClickPage("/register")}
+            >
               Register
             </button>
-            <button className="text-white font-normal bg-blue-500 px-4 py-2 rounded-md ml-4 transition duration-300 ease-in-out hover:bg-blue-600">
+            <button
+              className="text-white font-normal bg-blue-500 px-4 py-2 rounded-md ml-4 transition duration-300 ease-in-out hover:bg-blue-600"
+              onClick={() => onClickPage("/login")}
+            >
               Sign In
             </button>
           </div>
