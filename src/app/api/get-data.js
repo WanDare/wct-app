@@ -21,7 +21,6 @@ export async function fetchUserData() {
 //   return data;
 // }
 
-
 export const fetchEventData = async () => {
   try {
     const event1DocRef = doc(db, "feature_detail", "event1");

@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import Navbar from "../components/navbar";
 
 const style = {
-  container: `bg-customGrey w-3/12 flex flex-col items-center rounded-lg p-5`,
+  container: `bg-[#F2F2F2] w-4/12 flex flex-col items-center rounded-lg p-5 mt-10`,
   previewContainer: `mt-4`,
   previewImage: `w-20 h-20 object-cover mr-2 mb-2 rounded`,
 };
@@ -149,7 +149,10 @@ export default function Postevent() {
             </select>
           </label>
 
-          <button className="btn btn-success text-white mt-4" onClick={handleUpload}>
+          <button
+            className="btn btn-success text-white mt-4"
+            onClick={handleUpload}
+          >
             Upload
           </button>
         </div>

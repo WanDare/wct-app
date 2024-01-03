@@ -1,6 +1,7 @@
 "use client";
 import React, { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
+import AuthDetail from "./authDetail";
 
 const Navbar = (isHomepage) => {
   const router = useRouter();
@@ -145,14 +146,7 @@ const Navbar = (isHomepage) => {
           )}
 
           {/* Register and Sign In Buttons */}
-          <div className="flex flex-row lg:flex">
-            <button className="text-blue-500 font-normal bg-transparent border border-blue-500 px-4 rounded-md transition duration-300 ease-in-out hover:bg-blue-600 hover:border-blue-600 hover:text-white">
-              Register
-            </button>
-            <button className="text-white font-normal bg-blue-500 px-4 py-2 rounded-md ml-4 transition duration-300 ease-in-out hover:bg-blue-600">
-              Sign In
-            </button>
-          </div>
+          <AuthDetail />
         </div>
       </div>
     </nav>
