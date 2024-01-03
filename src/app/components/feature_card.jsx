@@ -1,11 +1,13 @@
+"use client";
 import { useEffect, useState } from "react";
+import { db } from "../firebaseConfig";
+import { doc, getDoc } from "firebase/firestore";
 import { getDownloadURL, list, ref } from "firebase/storage";
 import { storage } from "../firebaseConfig";
-import { fetchEventData } from "../api/get-data";
 
-const Feature = () => {
+export default function Feature() {
   const [imageUrls, setImageUrls] = useState([]);
-  const [usersData, setUsersData] = useState([]);
+  const [eventData, setEventData] = useState([]);
 
   useEffect(() => {
     const featureRef = ref(storage, "Feature_event");
@@ -18,34 +20,45 @@ const Feature = () => {
       })
       .then((urls) => {
         setImageUrls(urls);
+        fetchEventDataForEvents(urls);
       })
       .catch((error) => {
         console.error("Error getting download URLs:", error);
       });
   }, []);
 
-  useEffect(() => {
-    async function fetchData() {
-      try {
-        const data = await fetchEventData();
-        setUsersData(data);
-      } catch (error) {
-        console.error("Error fetching data:", error);
-      }
+  const fetchEventDataForEvents = async (urls) => {
+    try {
+      const eventDocRefs = urls.map((url, index) =>
+        doc(db, "feature_detail", `event${index + 1}`)
+      );
+
+      const eventDocSnapshots = await Promise.all(
+        eventDocRefs.map((docRef) => getDoc(docRef))
+      );
+
+      const eventData = eventDocSnapshots.map((docSnapshot, index) => ({
+        id: docSnapshot.id,
+        ...docSnapshot.data(),
+        imageUrl: urls[index] || null,
+      }));
+
+      setEventData(eventData);
+    } catch (error) {
+      console.error("Error fetching data:", error);
     }
-    fetchData();
-  }, []);
+  };
 
   return (
     <div>
       {imageUrls.length > 0 ? (
         <ul role="list" className="flex flex-wrap gap-3 justify-center">
-          {imageUrls.map((url, index) => (
+          {eventData.map((event, index) => (
             <li key={index}>
               <div className="items-center gap-x-6">
                 <div className="relative w-full rounded-xl overflow-hidden group">
                   <img
-                    src={url}
+                    src={event.imageUrl}
                     alt={`Image ${index + 1}`}
                     className="object-cover w-100 h-100 rounded-lg duration-700 ease-in-out group-hover:scale-110"
                   />
@@ -58,14 +71,11 @@ const Feature = () => {
                   </div>
                 </div>
               </div>
-              <div>
-                {usersData.map((user) => (
-                  <div key={user.id} className="mb-4">
-                    {[user.event, user.description].map((value, index) => (
-                      <p key={index}>{value}</p>
-                    ))}
-                  </div>
-                ))}
+              <div className="mb-4">
+                <div key={event.id} className="">
+                  <h2 className="font-bold">{event.event}</h2>
+                  <p>{event.description}</p>
+                </div>
               </div>
             </li>
           ))}
@@ -83,6 +93,4 @@ const Feature = () => {
       )}
     </div>
   );
-};
-
-export default Feature;
+}

@@ -1,13 +1,14 @@
 "use client";
 import { useEffect, useState } from "react";
+import { db } from "../firebaseConfig";
+import { doc, getDoc } from "firebase/firestore";
 import { getDownloadURL, list, ref } from "firebase/storage";
 import { storage } from "../firebaseConfig";
-import { fetchRecentData } from "../api/get-data";
 import { useRouter } from "next/navigation";
 
-const Recentcard = () => {
+export default function Recentcard() {
   const [imageUrls, setImageUrls] = useState([]);
-  const [usersData, setUsersData] = useState([]);
+  const [eventData, setEventData] = useState([]);
   const router = useRouter();
 
   const onClickPage = (pathname) => {
@@ -25,34 +26,45 @@ const Recentcard = () => {
       })
       .then((urls) => {
         setImageUrls(urls);
+        fetchEventDataForEvents(urls);
       })
       .catch((error) => {
         console.error("Error getting download URLs:", error);
       });
   }, []);
 
-  useEffect(() => {
-    async function fetchData() {
-      try {
-        const data = await fetchRecentData();
-        setUsersData(data);
-      } catch (error) {
-        console.error("Error fetching data:", error);
-      }
+  const fetchEventDataForEvents = async (urls) => {
+    try {
+      const eventDocRefs = urls.map((url, index) =>
+        doc(db, "feature_detail", `detailevent${index + 1}`)
+      );
+
+      const eventDocSnapshots = await Promise.all(
+        eventDocRefs.map((docRef) => getDoc(docRef))
+      );
+
+      const eventData = eventDocSnapshots.map((docSnapshot, index) => ({
+        id: docSnapshot.id,
+        ...docSnapshot.data(),
+        imageUrl: urls[index] || null,
+      }));
+
+      setEventData(eventData);
+    } catch (error) {
+      console.error("Error fetching data:", error);
     }
-    fetchData();
-  }, []);
+  };
 
   return (
     <div>
       {imageUrls.length > 0 ? (
         <ul role="list" className="flex flex-wrap gap-3 justify-center">
-          {imageUrls.map((url, index) => (
+          {eventData.map((event, index) => (
             <li key={index}>
               <div className="items-center gap-x-6">
                 <div className="relative w-full rounded-xl overflow-hidden group">
                   <img
-                    src={url}
+                    src={event.imageUrl}
                     alt={`Image ${index + 1}`}
                     className="flex flex-col h-80 w-96 gap-y-2"
                     style={{
@@ -64,16 +76,13 @@ const Recentcard = () => {
                   <div className="absolute top-0 w-full h-full transition duration-300 opacity-50 rounded-lg group-hover:bg-black" />
 
                   <div className="absolute top-0 w-full h-full p-10 text-white">
-                    {usersData.map((user) => (
-                      <div key={user.id} className="">
-                        <p className="text-2xl font-bold">{user.event}</p>
-                        <p className="text-white group-hover:text-white">
-                          {user.description}
-                        </p>
-                      </div>
-                    ))}
+                    <div key={event.id}>
+                      <h2 className="text-2xl font-bold">{event.event}</h2>
+                      <p className="text-white group-hover:text-white">
+                        {event.description}
+                      </p>
+                    </div>
                   </div>
-
                   <div
                     className="absolute bottom-10 left-10"
                     onClick={() => onClickPage("/contact")}
@@ -99,6 +108,4 @@ const Recentcard = () => {
       )}
     </div>
   );
-};
-
-export default Recentcard;
+}
