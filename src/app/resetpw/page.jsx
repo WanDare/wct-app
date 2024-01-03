@@ -2,7 +2,7 @@
 import React, { useState } from "react";
 import { useRouter } from "next/navigation";
 
-export default function Login() {
+export default function resetpw() {
   const router = useRouter();
   const onClickPage = (pathname) => {
     router.push(pathname);
@@ -26,7 +26,7 @@ export default function Login() {
               <span className="label-text">Email Address</span>
             </div>
             <input
-              type="text"
+              type="email"
               placeholder="Type here"
               className="input input-bordered w-full"
             />

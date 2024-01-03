@@ -1,6 +1,8 @@
 "use client";
 import React, { useState } from "react";
 import { useRouter } from "next/navigation";
+import { createUserWithEmailAndPassword } from "firebase/auth";
+import { auth } from "../firebaseConfig";
 
 export default function Register() {
   const router = useRouter();
@@ -10,38 +12,29 @@ export default function Register() {
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [confirmPassword, setConfirmPassword] = useState("");
+  // const [confirmPassword, setConfirmPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
-  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
-  const [showPasswordInput, setPasswordInput] = useState(false);
-  const [showEmailInput, setEmailInput] = useState(true);
+  // const [showConfirmPassword, setShowConfirmPassword] = useState(false);
 
   const togglePasswordVisibility = () => {
     setShowPassword(!showPassword);
   };
 
-  const toggleConfirmPasswordVisibility = () => {
-    setShowConfirmPassword(!showConfirmPassword);
-  };
+  // const toggleConfirmPasswordVisibility = () => {
+  //   setShowConfirmPassword(!showConfirmPassword);
+  // };
 
-  const handleEmailChange = (e) => {
-    setEmail(e.target.value);
-  };
-
-  const handlePasswordChange = (e) => {
-    setPassword(e.target.value);
-  };
-
-  const handleConfirmPasswordChange = (e) => {
-    setConfirmPassword(e.target.value);
-  };
-
-  const handleContinue = () => {
-    // You can perform additional validation if needed
-    if (email.trim() !== "") {
-      setPasswordInput(true);
-      setEmailInput(false);
-    }
+  const register = (e) => {
+    e.preventDefault();
+    createUserWithEmailAndPassword(auth, email, password)
+      .then((userCredential) => {
+        router.push("/");
+        console.log(userCredential);
+      })
+      .catch((error) => {
+        alert("Invalid input");
+        console.log(error);
+      });
   };
 
   return (
@@ -57,21 +50,20 @@ export default function Register() {
       <div className="flex justify-center mt-24">
         <div className="flex flex-col items-center lg:w-3/12 sm:w-5/12">
           <h1 className="font-bold text-2xl">Register</h1>
-          {showEmailInput && (
+          <form className="w-full" onSubmit={register}>
             <label className="form-control w-full mt-10">
               <div className="label">
                 <span className="label-text">Email Address</span>
               </div>
               <input
-                type="text"
+                type="email"
                 placeholder="Type here"
                 className="input input-bordered w-full"
-                onChange={handleEmailChange}
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
               />
             </label>
-          )}
 
-          {showPasswordInput && (
             <label className="form-control w-full mt-5">
               <div className="label">
                 <span className="label-text">Password</span>
@@ -81,7 +73,8 @@ export default function Register() {
                   type={showPassword ? "text" : "password"}
                   placeholder="Type here"
                   className="input input-bordered w-full pr-10"
-                  onChange={handlePasswordChange}
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
                 />
                 <span
                   className="absolute inset-y-0 right-0 flex items-center pr-3 cursor-pointer"
@@ -144,10 +137,8 @@ export default function Register() {
                 </span>
               </div>
             </label>
-          )}
 
-          {showPasswordInput && (
-            <label className="form-control w-full mt-5">
+            {/* <label className="form-control w-full mt-5">
               <div className="label">
                 <span className="label-text">Confirm Password</span>
               </div>
@@ -156,7 +147,8 @@ export default function Register() {
                   type={showConfirmPassword ? "text" : "password"}
                   placeholder="Type here"
                   className="input input-bordered w-full pr-10"
-                  onChange={handleConfirmPasswordChange}
+                  value={confirmPassword}
+                  onChange={(e) => setConfirmPassword(e.target.value)}
                 />
                 <span
                   className="absolute inset-y-0 right-0 flex items-center pr-3 cursor-pointer"
@@ -218,16 +210,14 @@ export default function Register() {
                   )}
                 </span>
               </div>
-            </label>
-          )}
+            </label> */}
 
-          <button
-            className="btn bg-sky-500 w-6/12 mt-5"
-            onClick={handleContinue}
-          >
-            Continue
-          </button>
-
+            <div className="flex justify-center">
+              <button className="btn bg-sky-500 w-6/12 mt-5" type="submit">
+                Continue
+              </button>
+            </div>
+          </form>
           <div className="text-sm mt-3">
             <span>Already have an account? </span>
             <button
