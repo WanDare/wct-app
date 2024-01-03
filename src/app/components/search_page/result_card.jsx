@@ -57,7 +57,7 @@ function ResultCard() {
           </p>
           <button
             className={style.btn}
-            onClick={() => onClickPage("/discovery")}
+            onClick={() => onClickPage("/detail_page")}
           >
             See Detail
           </button>
