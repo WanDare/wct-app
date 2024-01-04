@@ -1,5 +1,6 @@
 import React from "react";
 import { useRouter } from "next/navigation";
+import { auth } from "../firebaseConfig";
 
 const EndWidget = [
   {
@@ -10,8 +11,17 @@ const EndWidget = [
 
 const Endfooter = () => {
   const router = useRouter();
-  const onClickPage = (pathname) => {
-    router.push(pathname);
+
+  const onClickPage = () => {
+    const user = auth.currentUser;
+
+    if (user) {
+      // User is logged in, navigate to /post_page
+      router.push("/post_page");
+    } else {
+      // User is not logged in, navigate to /login
+      router.push("/login");
+    }
   };
 
   return (
@@ -34,7 +44,7 @@ const Endfooter = () => {
                 </h3>
                 <button
                   className="flex-initial w-32 bg-blue-500 p-3 rounded-lg drop-shadow-2xl text-white hover:bg-blue-600"
-                  onClick={() => onClickPage("/post_page")}
+                  onClick={onClickPage}
                 >
                   Post event
                 </button>

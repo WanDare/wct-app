@@ -37,12 +37,12 @@ const AuthDetail = () => {
         <div>
           <div className="avatar dropdown dropdown-bottom text-black">
             <div
-              className="w-12 rounded-full m-1 mr-20"
+              className="w-11  rounded-full m-1 mr-20"
               tabIndex={0}
               role="button"
             >
               <img
-                src="https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/378290fb-a496-4efc-9456-6bd96d372677/ddiu4q7-23fe4527-1f5d-4c1f-8396-c4e84c7869d2.png?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7InBhdGgiOiJcL2ZcLzM3ODI5MGZiLWE0OTYtNGVmYy05NDU2LTZiZDk2ZDM3MjY3N1wvZGRpdTRxNy0yM2ZlNDUyNy0xZjVkLTRjMWYtODM5Ni1jNGU4NGM3ODY5ZDIucG5nIn1dXSwiYXVkIjpbInVybjpzZXJ2aWNlOmZpbGUuZG93bmxvYWQiXX0.YIAzKN1vMss0cYoILdhYCIsjQDCGm9Ib82PzaLc_Hug"
+                src="https://icon-library.com/images/default-user-icon/default-user-icon-13.jpg"
                 alt="User Avatar"
               />
             </div>

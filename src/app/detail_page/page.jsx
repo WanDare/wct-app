@@ -5,6 +5,7 @@ import {
   People,
   PlaceOutlined,
   Timelapse,
+  TimeToLeave, //use parking instead of number of participant ** car replace people icon
 } from "@mui/icons-material";
 import { doc, getDoc } from "firebase/firestore";
 import { useEffect, useState } from "react";
@@ -146,7 +147,7 @@ const EventDetail = () => {
                       </p>
                       <p>
                         {" "}
-                        <People className=" text-xl md:text-2xl text-blue-500 mr-2" />{" "}
+                        <TimeToLeave className=" text-xl md:text-2xl text-blue-500 mr-2" />{" "}
                         {eventData.maxParticipant}{" "}
                       </p>
                     </div>

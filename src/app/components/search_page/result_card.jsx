@@ -1,6 +1,8 @@
 "use client";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
+import { getFirestore, collection, getDocs } from "firebase/firestore";
+import { getStorage, ref, getDownloadURL } from "firebase/storage";
 
 const style = {
   container: `flex flex-col mx-4 lg:mx-20 mt-5 border rounded-md bg-white shadow-lg`,
@@ -12,57 +14,65 @@ const style = {
 
 function ResultCard() {
   const router = useRouter();
+  const [events, setEvents] = useState([]);
+
   const onClickPage = (pathname) => {
     router.push(pathname);
   };
 
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const db = getFirestore();
+        const eventsCollection = collection(db, "events");
+        const snapshot = await getDocs(eventsCollection);
+
+        const eventData = await Promise.all(
+          snapshot.docs.map(async (doc) => {
+            const data = doc.data();
+            const imageUrl = data.images[0];
+            const storage = getStorage();
+            const imageRef = ref(storage, imageUrl);
+            const imageUrlResolved = await getDownloadURL(imageRef);
+            return { ...data, imageUrl: imageUrlResolved, id: doc.id };
+          })
+        );
+
+        setEvents(eventData);
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      }
+    };
+
+    fetchData();
+  }, []);
+
   return (
-    <div className={style.container}>
-      <div className={style.secondContainer}>
-        <img
-          src="https://cdn-az.allevents.in/events7/banners/0ba78525223592ad7ccd6a23e626f6aad0b3a2c9ef2fd73d12867f2d62019086-rimg-w960-h384-gmir.jpg?v=1695510629"
-          className={style.img}
-        />
-        <div className={style.content}>
-          <h1 className="text-xl font-bold  ">River walk</h1>
-          <div className="rating rating-md">
-            <input
-              type="radio"
-              name="rating-7"
-              className="mask mask-star-2 bg-orange-400"
-            />
-            <input
-              type="radio"
-              name="rating-7"
-              className="mask mask-star-2 bg-orange-400"
-            />
-            <input
-              type="radio"
-              name="rating-7"
-              className="mask mask-star-2 bg-orange-400"
-            />
-            <input
-              type="radio"
-              name="rating-7"
-              className="mask mask-star-2 bg-orange-400"
-            />
-            <input
-              type="radio"
-              name="rating-7"
-              className="mask mask-star-2 bg-orange-400"
-            />
+    <div>
+      {events.length > 0 ? (
+        events.map((event, index) => (
+          <div key={index} className={style.container}>
+            <div className={style.secondContainer}>
+              <img src={event.imageUrl} className={style.img} />
+              <div className={style.content}>
+                <h1 className="text-xl font-bold">{event.title}</h1>
+
+                <p className="mt-2 lg:mt-4">{event.description}</p>
+                <button
+                  className={style.btn}
+                  onClick={() => onClickPage(`/detail_page/${event.id}`)}
+                >
+                  See Detail
+                </button>
+              </div>
+            </div>
           </div>
-          <p className="mt-2 lg:mt-4">
-            Scroll along the beach take a break enjoy the food
-          </p>
-          <button
-            className={style.btn}
-            onClick={() => onClickPage("/detail_page")}
-          >
-            See Detail
-          </button>
+        ))
+      ) : (
+        <div className="flex justify-center font-bold text-xl mt-24 mb-24">
+          No results found
         </div>
-      </div>
+      )}
     </div>
   );
 }
