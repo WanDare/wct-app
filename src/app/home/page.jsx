@@ -146,7 +146,7 @@ const Home = () => {
           <div className="text-center pt-10">
             <h1 className="text-xl p-2">Explore event with Event Finder</h1>
             <a href="#link" className="text-sm text-blue-500">
-              Discover new places and experiences
+              Discover new places and experiences &rarr;
             </a>
           </div>
         </div>

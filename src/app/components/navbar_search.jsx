@@ -91,7 +91,7 @@ const NavbarSearch = (isHomepage) => {
             <li>
               <button
                 className="hover:text-black"
-                onClick={() => onClickPage("/contact")}
+                onClick={() => onClickPage("/discovery")}
               >
                 Contact
               </button>
@@ -133,7 +133,7 @@ const NavbarSearch = (isHomepage) => {
                 <li>
                   <button
                     className="hover:text-black"
-                    onClick={() => onClickPage("/contact")}
+                    onClick={() => onClickPage("/discovery")}
                   >
                     Contact
                   </button>

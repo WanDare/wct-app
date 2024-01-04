@@ -94,7 +94,7 @@ const Navbar = (isHomepage) => {
             <li>
               <button
                 className="hover:text-black"
-                onClick={() => onClickPage("/contact")}
+                onClick={() => onClickPage("/discovery")}
               >
                 Contact
               </button>
@@ -136,7 +136,7 @@ const Navbar = (isHomepage) => {
                 <li>
                   <button
                     className="hover:text-black"
-                    onClick={() => onClickPage("/contact")}
+                    onClick={() => onClickPage("/discovery")}
                   >
                     Contact
                   </button>
