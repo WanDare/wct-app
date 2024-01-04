@@ -25,7 +25,7 @@ export default function discovery() {
           </div>
         </div>
       </div>
-      <div className="container mx-auto absolute left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-white shadow-2xl rounded-lg">
+      <div className="container mx-auto absolute left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-white shadow-2xl rounded-xl">
         <div class="max-w-[85rem] px-4 py-10 sm:px-6 lg:px-8 lg:py-14 mx-auto">
           <div class="max-w-2xl lg:max-w-5xl mx-auto">
             <div class="text-center">
