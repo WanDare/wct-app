@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import Navbar from "../components/navbar";
 
 const style = {
-  container: `bg-[#F2F2F2] w-4/12 flex flex-col items-center rounded-lg p-5 mt-10`,
+  container: `bg-[#F2F2F2] w-4/12 flex flex-col items-center rounded-lg p-5 mt-10 m-5`,
   previewContainer: `mt-4`,
   previewImage: `w-20 h-20 object-cover mr-2 mb-2 rounded`,
 };
@@ -13,6 +13,8 @@ export default function Postevent() {
   const [eventLocation, setEventLocation] = useState("");
   const [eventDescription, setEventDescription] = useState("");
   const [selectedFiles, setSelectedFiles] = useState([]);
+  const [eventDate, setEventDate] = useState("");
+  const [eventTime, setEventTime] = useState("");
 
   const handleFileChange = (e) => {
     const files = e.target.files;
@@ -41,8 +43,16 @@ export default function Postevent() {
     setSelectedFiles([]);
   };
 
+  const handleTimeChange = (e) => {
+    setEventTime(e.target.value);
+  };
+
+  const handleDateChange = (e) => {
+    setEventDate(e.target.value);
+  };
+
   return (
-    <div style={{ backgroundImage: "url('../public/images/festival.jpg')" }}>
+    <div>
       <Navbar />
 
       <div className="flex justify-center mt-10">
@@ -106,11 +116,43 @@ export default function Postevent() {
             <div className="label">
               <span className="label-text">Event Location</span>
             </div>
+            <select className="select select-bordered">
+              <option style={{ display: "none" }}>Pick one</option>
+              <option>Phnom Penh</option>
+              <option>Siem Reap</option>
+              <option>Sihanouk Vile</option>
+              <option>Battembong</option>
+              <option>Kompot</option>
+            </select>
+          </label>
+
+          <label className="form-control w-full max-w-xs">
+            <div className="label">
+              <span className="label-text">Event Location</span>
+            </div>
             <input
               type="text"
               placeholder="Google map url"
               className="input input-bordered w-full max-w-xs"
               value={eventLocation}
+            />
+          </label>
+
+          <label className="w-full max-w-xs">
+            <div className="label">
+              <span className="label-text">Event Date & time</span>
+            </div>
+            <input
+              type="date"
+              className="input input-bordered w-6/12 max-w-xs"
+              value={eventDate}
+              onChange={handleDateChange}
+            />
+            <input
+              type="time"
+              className="input input-bordered w-6/12 max-w-xs"
+              value={eventTime}
+              onChange={handleTimeChange}
             />
           </label>
 
