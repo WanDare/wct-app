@@ -1,59 +1,49 @@
 "use client";
 import { useEffect, useState } from "react";
-import { db } from "../firebaseConfig";
-import { doc, getDoc } from "firebase/firestore";
-import { getDownloadURL, list, ref } from "firebase/storage";
-import { storage } from "../firebaseConfig";
+import { getFirestore, collection, getDocs } from "firebase/firestore";
+import { getDownloadURL, ref, getStorage } from "firebase/storage";
+import { useRouter } from "next/navigation";
 
 export default function Peoplelove() {
-  const [imageUrls, setImageUrls] = useState([]);
-  const [eventData, setEventData] = useState([]);
+  const router = useRouter();
+  const [events, setEvents] = useState([]);
+
+  const onClickPage = (pathname) => {
+    router.push(pathname);
+  };
 
   useEffect(() => {
-    const featureRef = ref(storage, "Feature_event");
+    const fetchData = async () => {
+      try {
+        const db = getFirestore();
+        const eventsCollection = collection(db, "events");
+        const snapshot = await getDocs(eventsCollection);
 
-    // List all items in the directory
-    list(featureRef)
-      .then((result) => {
-        const promises = result.items.map((itemRef) => getDownloadURL(itemRef));
-        return Promise.all(promises);
-      })
-      .then((urls) => {
-        setImageUrls(urls);
-        fetchEventDataForEvents(urls);
-      })
-      .catch((error) => {
-        console.error("Error getting download URLs:", error);
-      });
+        const eventData = await Promise.all(
+          snapshot.docs.map(async (doc) => {
+            const data = doc.data();
+            const imageUrl = data.images[0];
+            const storage = getStorage();
+            const imageRef = ref(storage, imageUrl);
+            const imageUrlResolved = await getDownloadURL(imageRef);
+            return { ...data, imageUrl: imageUrlResolved, id: doc.id };
+          })
+        );
+
+        setEvents(eventData);
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      }
+    };
+
+    fetchData();
   }, []);
-
-  const fetchEventDataForEvents = async (urls) => {
-    try {
-      const eventDocRefs = urls.map((url, index) =>
-        doc(db, "feature_detail", `event${index + 1}`)
-      );
-
-      const eventDocSnapshots = await Promise.all(
-        eventDocRefs.map((docRef) => getDoc(docRef))
-      );
-
-      const eventData = eventDocSnapshots.map((docSnapshot, index) => ({
-        id: docSnapshot.id,
-        ...docSnapshot.data(),
-        imageUrl: urls[index] || null,
-      }));
-
-      setEventData(eventData);
-    } catch (error) {
-      console.error("Error fetching data:", error);
-    }
-  };
 
   return (
     <div>
-      {imageUrls.length > 0 ? (
+      {events.length > 0 ? (
         <ul role="list" className="flex flex-wrap gap-3 justify-center">
-          {eventData.map((event, index) => (
+          {events.map((event, index) => (
             <li key={index}>
               <div className="items-center gap-x-6">
                 <div className="relative w-full rounded-xl overflow-hidden group">
@@ -64,7 +54,10 @@ export default function Peoplelove() {
                   />
                   <div className="absolute top-0 w-full h-full transition duration-300 opacity-50 rounded-lg group-hover:bg-black" />
 
-                  <div className="absolute right-0 duration-300 transform -translate-x-1/2 -translate-y-1/2 left-1/2 -bottom-20 group-hover:bottom-5">
+                  <div
+                    className="absolute right-0 duration-300 transform -translate-x-1/2 -translate-y-1/2 left-1/2 -bottom-20 group-hover:bottom-5"
+                    onClick={() => onClickPage(`/search_area/${event.id}`)}
+                  >
                     <button className="h-10 px-8 font-normal bg-white border-none rounded-full btn btn-sm hover:bg-black hover:text-white">
                       Event View
                     </button>
