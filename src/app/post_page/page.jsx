@@ -146,7 +146,7 @@ export default function Postevent() {
           <label className="form-control w-full max-w-xs">
             <div className="label">
               <span className="label-text">Event Description</span>
-              <span className="label-text-alt text-red font-bold">
+              <span className="label-text-alt text-red-500 font-bold">
                 (maximum 100 words)
               </span>
             </div>
@@ -161,7 +161,7 @@ export default function Postevent() {
           <label className="form-control w-full max-w-xs">
             <div className="label">
               <span className="label-text">Event photos</span>
-              <span className="label-text-alt text-red font-bold">
+              <span className="label-text-alt text-red-500 font-bold">
                 (maximum 4 pictures)
               </span>
             </div>
@@ -201,6 +201,9 @@ export default function Postevent() {
           <label className="form-control w-full max-w-xs">
             <div className="label">
               <span className="label-text">Event Location</span>
+              <span className="label-text-alt text-red-500 font-bold">
+                (embed url)
+              </span>
             </div>
             <input
               type="text"

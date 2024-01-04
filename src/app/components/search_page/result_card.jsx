@@ -60,7 +60,7 @@ function ResultCard() {
                 <p className="mt-2 lg:mt-4">{event.description}</p>
                 <button
                   className={style.btn}
-                  onClick={() => onClickPage(`/detail_page/${event.id}`)}
+                  onClick={() => onClickPage(`/search_area/${event.id}`)}
                 >
                   See Detail
                 </button>
