@@ -3,6 +3,24 @@ import { auth } from "../firebaseConfig";
 import { onAuthStateChanged, signOut } from "firebase/auth";
 import { useRouter } from "next/navigation";
 
+export const currentUserId = () => {
+  const [authUser, setAuthUser] = useState(null);
+
+  useEffect(() => {
+    const listen = onAuthStateChanged(auth, (user) => {
+      if (user) {
+        setAuthUser({ id: user.uid });
+      } else {
+        setAuthUser(null);
+      }
+    });
+
+    return () => listen();
+  }, []);
+  const user = authUser || null;
+  return user ? user.id : null;
+};
+
 const AuthDetail = () => {
   const router = useRouter();
   const onClickPage = (pathname) => {
@@ -14,7 +32,7 @@ const AuthDetail = () => {
   useEffect(() => {
     const listen = onAuthStateChanged(auth, (user) => {
       if (user) {
-        setAuthUser(user);
+        setAuthUser({ id: user.uid, email: user.email });
       } else {
         setAuthUser(null);
       }
