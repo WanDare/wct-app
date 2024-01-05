@@ -1,6 +1,7 @@
 "use client";
 import React, { useState } from "react";
 import Footer from "../components/footer";
+import 'aos/dist/aos.css';
 import NavbarSearch from "../components/navbar_search";
 import { db } from "../firebaseConfig";
 import { addDoc, collection } from "firebase/firestore";
@@ -51,7 +52,7 @@ export default function Discovery() {
           alt=""
           className="absolute inset-0 -z-10 h-full w-full object-cover object-right md:object-center"
         />
-        <div className="container mx-auto pb-80">
+        <div className="container mx-auto pb-80" data-aos="fade-right" data-aos-delay="100">
           <div className="mx-auto max-w-2xl lg:mx-0">
             <h2 className="text-4xl font-bold tracking-tight text-white sm:text-6xl">
               Get in touch with us
@@ -65,6 +66,7 @@ export default function Discovery() {
           </div>
         </div>
       </div>
+      <div data-aos="fade-up" data-aos-delay="100" >
       <div className="container mx-auto absolute left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-white shadow-2xl rounded-xl">
         <div className="max-w-[85rem] px-4 py-10 sm:px-6 lg:px-8 lg:py-14 mx-auto">
           <div className="max-w-2xl lg:max-w-5xl mx-auto">
@@ -312,6 +314,7 @@ export default function Discovery() {
             </div>
           </div>
         </div>
+      </div>
       </div>
       <div className="pt-80 mt-40">
         <Footer />

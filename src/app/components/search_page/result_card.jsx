@@ -108,7 +108,7 @@ function ResultCard({ filteredEvents }) {
         )
       ) : (
         <div className="flex justify-center font-bold text-xl mt-24 mb-24">
-          Loading...
+          <progress className="progress w-56"></progress>
         </div>
       )}
     </div>

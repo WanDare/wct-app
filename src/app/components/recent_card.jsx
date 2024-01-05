@@ -81,7 +81,7 @@ export default function Recentcard() {
                   <div className="absolute top-0 w-full h-full p-10 text-white">
                     <div key={event.id}>
                       <h2 className="text-2xl font-bold">{event.title}</h2>
-                      <p className="text-white group-hover:text-white">
+                      <p className="text-white pt-2 group-hover:text-white">
                         <Description text={event.description} limit={25} />
                       </p>
                     </div>

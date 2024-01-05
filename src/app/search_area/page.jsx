@@ -42,7 +42,7 @@ const Search = () => {
   return (
     <div>
       <NavbarSearch />
-      <div className="pt-32" style={{ backgroundColor: "#2A5A9A" }}>
+      <div className="pt-32 bg-no-repeat bg-cover bg-center" style={{ backgroundImage: "url('images/overcity.jpg')"}}>
         <SearchArea onSearch={handleSearch} />
       </div>
       {loading ? (
