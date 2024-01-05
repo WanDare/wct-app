@@ -12,15 +12,30 @@ export default function Peoplelove() {
     router.push(pathname);
   };
 
+  //will change to sort by rating later
+  function shuffleArray(array) {
+    const shuffledArray = [...array];
+    for (let i = shuffledArray.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [shuffledArray[i], shuffledArray[j]] = [
+        shuffledArray[j],
+        shuffledArray[i],
+      ];
+    }
+    return shuffledArray;
+  }
+
   useEffect(() => {
     const fetchData = async () => {
       try {
         const db = getFirestore();
         const eventsCollection = collection(db, "events");
         const snapshot = await getDocs(eventsCollection);
+        const shuffledDocs = shuffleArray(snapshot.docs);
+        const selectedDocs = shuffledDocs.slice(0, 4);
 
         const eventData = await Promise.all(
-          snapshot.docs.map(async (doc) => {
+          selectedDocs.map(async (doc) => {
             const data = doc.data();
             const imageUrl = data.images[0];
             const storage = getStorage();

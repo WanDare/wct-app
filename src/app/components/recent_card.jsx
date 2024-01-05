@@ -30,7 +30,25 @@ export default function Recentcard() {
           })
         );
 
-        setEvents(eventData);
+        // Filter out events that have already passed
+        const currentDate = new Date();
+        const filteredEvents = eventData.filter((event) => {
+          const eventDate = new Date(event.date);
+          return eventDate >= currentDate;
+        });
+
+        // Sort remaining events by the time difference from the current date
+        const sortedEvents = filteredEvents.sort((a, b) => {
+          const dateA = new Date(a.date);
+          const dateB = new Date(b.date);
+
+          return Math.abs(dateA - currentDate) - Math.abs(dateB - currentDate);
+        });
+
+        // Select the top 3 closest events
+        const closestEvents = sortedEvents.slice(0, 3);
+
+        setEvents(closestEvents);
       } catch (error) {
         console.error("Error fetching data:", error);
       }
