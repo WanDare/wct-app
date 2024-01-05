@@ -19,7 +19,13 @@ export default function UpdateEventForm({ eventData, onUpdate }) {
   // Handle input changes
   const handleInputChange = (e) => {
     const { name, value } = e.target;
-    setFormData((prevData) => ({ ...prevData, [name]: value }));
+
+    // If the event is from a select dropdown, handle it separately
+    if (e.target.tagName === "SELECT") {
+      setFormData((prevData) => ({ ...prevData, [name]: e.target.value }));
+    } else {
+      setFormData((prevData) => ({ ...prevData, [name]: value }));
+    }
   };
 
   // Handle form submission
