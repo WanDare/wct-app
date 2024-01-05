@@ -11,7 +11,7 @@ const basic = Basic({
   subsets: ["latin"],
 });
 
-export default function RootLayout({ children }) {
+const RootLayout = ({ children }) => {
   return (
     <html lang="en">
       <body className={basic.className}>
@@ -19,4 +19,6 @@ export default function RootLayout({ children }) {
       </body>
     </html>
   );
-}
+};
+
+export default RootLayout;

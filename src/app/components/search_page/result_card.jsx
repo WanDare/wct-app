@@ -1,68 +1,116 @@
-"use client";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
+import { getFirestore, collection, getDocs } from "firebase/firestore";
+import { getStorage, ref, getDownloadURL } from "firebase/storage";
 
 const style = {
-  container: `flex flex-col mx-4 lg:mx-20 mt-5 border rounded-md bg-white shadow-lg `,
-  secondContainer: `flex flex-col lg:flex-row p-4 `,
+  container: `flex flex-col mx-4 lg:mx-20 mt-5 border rounded-md bg-white shadow-lg`,
+  secondContainer: `flex flex-col lg:flex-row p-4`,
   img: `w-full lg:w-4/12 rounded-md lg:mr-4`,
-  content: `mt-4 lg:mt-0 lg:ml-4 `,
+  content: `mt-4 lg:mt-0 lg:ml-4`,
   btn: `btn btn-outline btn-info mt-4 lg:mt-20`,
-  badge: `badge sm:ml-[450px] md:ml-[550px] lg:ml-[700px] `,
 };
 
-function ResultCard() {
+function ResultCard({ filteredEvents }) {
   const router = useRouter();
-  const onClickPage = (pathname) => {
-    router.push(pathname);
+  const [events, setEvents] = useState(null);
+
+  const onClickPage = (eventId) => {
+    router.push(`/search_area/${eventId}`);
   };
 
-  return (
-    <div className={style.container}>
-      <div className={style.secondContainer}>
-        <img
-          src="https://cdn-az.allevents.in/events7/banners/0ba78525223592ad7ccd6a23e626f6aad0b3a2c9ef2fd73d12867f2d62019086-rimg-w960-h384-gmir.jpg?v=1695510629"
-          className={style.img}
-        />
-        <div className={style.content}>
-          <h1 className="text-xl font-bold  ">River walk</h1>
-          <div className="rating rating-md">
-            <input
-              type="radio"
-              name="rating-7"
-              className="mask mask-star-2 bg-orange-400"
-            />
-            <input
-              type="radio"
-              name="rating-7"
-              className="mask mask-star-2 bg-orange-400"
-            />
-            <input
-              type="radio"
-              name="rating-7"
-              className="mask mask-star-2 bg-orange-400"
-            />
-            <input
-              type="radio"
-              name="rating-7"
-              className="mask mask-star-2 bg-orange-400"
-            />
-            <input
-              type="radio"
-              name="rating-7"
-              className="mask mask-star-2 bg-orange-400"
-            />
-          </div>
-          <p className="mt-2 lg:mt-4">
-            Scroll along the beach take a break enjoy the food
-          </p>
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const db = getFirestore();
+        const eventsCollection = collection(db, "events");
+        const snapshot = await getDocs(eventsCollection);
 
-          <button className={style.btn} onClick={() => onClickPage("/post")}>
-            See Detail
-          </button>
-          <div className={style.badge}>Free</div>
+        const eventData = await Promise.all(
+          snapshot.docs.map(async (doc) => {
+            const data = doc.data();
+            const imageUrl =
+              data.images && data.images.length > 0 ? data.images[0] : null;
+
+            try {
+              if (imageUrl) {
+                const storage = getStorage();
+                const imageRef = ref(storage, imageUrl);
+                const imageUrlResolved = await getDownloadURL(imageRef);
+                return { ...data, imageUrl: imageUrlResolved, id: doc.id };
+              } else {
+                return { ...data, id: doc.id };
+              }
+            } catch (error) {
+              console.error("Error fetching image:", error);
+              return { ...data, id: doc.id };
+            }
+          })
+        );
+        const eventsToDisplay =
+          filteredEvents.length > 0 ? filteredEvents : eventData;
+
+        const eventsWithImages = await Promise.all(
+          eventsToDisplay.map(async (event) => {
+            const imageUrl =
+              event.images && event.images.length > 0 ? event.images[0] : null;
+
+            try {
+              if (imageUrl) {
+                const storage = getStorage();
+                const imageRef = ref(storage, imageUrl);
+                const imageUrlResolved = await getDownloadURL(imageRef);
+                return { ...event, imageUrl: imageUrlResolved, id: event.id };
+              } else {
+                return event;
+              }
+            } catch (error) {
+              console.error("Error fetching image:", error);
+              return event;
+            }
+          })
+        );
+
+        setEvents(eventsWithImages);
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      }
+    };
+
+    fetchData();
+  }, [filteredEvents]);
+
+  return (
+    <div>
+      {events !== null ? (
+        events.length > 0 ? (
+          events.map((event, index) => (
+            <div key={index} className={style.container}>
+              <div className={style.secondContainer}>
+                <img src={event.imageUrl} className={style.img} />
+                <div className={style.content}>
+                  <h1 className="text-xl font-bold">{event.title}</h1>
+                  <p className="mt-2 lg:mt-4">{event.description}</p>
+                  <button
+                    className={style.btn}
+                    onClick={() => onClickPage(event.id)}
+                  >
+                    See Detail
+                  </button>
+                </div>
+              </div>
+            </div>
+          ))
+        ) : (
+          <div className="flex justify-center font-bold text-xl mt-24 mb-24">
+            {filteredEvents.length === 0 && "No results found"}
+          </div>
+        )
+      ) : (
+        <div className="flex justify-center font-bold text-xl mt-24 mb-24">
+          <span className="loading loading-dots loading-lg"></span>
         </div>
-      </div>
+      )}
     </div>
   );
 }
