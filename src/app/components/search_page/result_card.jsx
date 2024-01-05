@@ -108,7 +108,7 @@ function ResultCard({ filteredEvents }) {
         )
       ) : (
         <div className="flex justify-center font-bold text-xl mt-24 mb-24">
-          Loading...
+          <span className="loading loading-dots loading-lg"></span>
         </div>
       )}
     </div>

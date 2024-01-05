@@ -4,10 +4,18 @@ import {
   DateRange,
   People,
   PlaceOutlined,
+  Router,
+  Segment,
   Timelapse,
   TimeToLeave, //use parking instead of number of participant ** car replace people icon
 } from "@mui/icons-material";
-import { getDoc, getFirestore, doc } from "firebase/firestore";
+import {
+  getDoc,
+  getFirestore,
+  doc,
+  updateDoc,
+  deleteDoc,
+} from "firebase/firestore";
 import { useEffect, useState } from "react";
 import { db, storage } from "../../firebaseConfig";
 import { ref, getDownloadURL, getStorage } from "firebase/storage";
@@ -15,8 +23,14 @@ import Navbar from "../../components/navbar";
 import Footer from "../../components/footer";
 import { data } from "autoprefixer";
 import { images } from "../../../../next.config";
+import { currentUserId } from "@/app/components/authDetail";
+import UpdateEventForm from "@/app/update_page/page";
+import { useRouter } from "next/navigation";
 
 const EventDetail = ({ params }) => {
+  const router = useRouter();
+  const currentUser = currentUserId();
+
   // states of data
   const [event, setEvent] = useState(null);
 
@@ -53,6 +67,35 @@ const EventDetail = ({ params }) => {
     }
   }, [params.eventId]);
 
+  const handleUpdate = async (updatedData) => {
+    try {
+      // Get the reference to the event document in Firebase
+      const eventDocRef = doc(db, "events", event.id);
+
+      // Update the event data in Firebase
+      await updateDoc(eventDocRef, updatedData);
+
+      router.push("/search_area");
+      alert("Updated Succesfully");
+    } catch (error) {
+      console.error("Error updating event:", error);
+    }
+  };
+
+  const handleDelete = async () => {
+    try {
+      // Get the reference to the event document in Firebase
+      const eventDocRef = doc(db, "events", event.id);
+
+      // Delete the event from Firebase
+      await deleteDoc(eventDocRef);
+
+      router.push("/search_area");
+      alert("Event deleted successfully");
+    } catch (error) {
+      console.error("Error deleting event:", error);
+    }
+  };
   return (
     <div>
       <Navbar />
@@ -65,7 +108,7 @@ const EventDetail = ({ params }) => {
 
         {!event && (
           <div className=" h-[85vh] flex justify-center items-center  text-base lg:text-xl">
-            There is no data with the Event.
+            <span className="loading loading-dots loading-lg"></span>
           </div>
         )}
         {event && images && (
@@ -95,10 +138,73 @@ const EventDetail = ({ params }) => {
             <section className="event-infos bg-zinc-100 pb-10">
               {/* event name and shorthanded info (rating, location) */}
               <div className="event-shorthanded-info container mx-auto py-8 pl-5 md:pl-0 ">
-                <h1 className=" text-2xl md:text-3xl font-semibold text-gray-800">
+                <h1 className=" flex justify-between text-2xl md:text-3xl font-semibold text-gray-800">
                   {" "}
-                  {event.title}{" "}
+                  {event.title}
+                  {currentUser === event.userId && (
+                    <div className="dropdown dropdown-end">
+                      <div tabIndex={0} role="button" className="btn m-1">
+                        <Segment />
+                      </div>
+                      <ul
+                        tabIndex={0}
+                        className="dropdown-content z-[1] menu p-2 shadow bg-base-100 rounded-box w-52"
+                      >
+                        <li>
+                          <button
+                            onClick={() =>
+                              document.getElementById("my_modal_4").showModal()
+                            }
+                          >
+                            Update
+                          </button>
+                        </li>
+                        <li>
+                          <button
+                            onClick={() =>
+                              document.getElementById("my_modal_3").showModal()
+                            }
+                          >
+                            Delete
+                          </button>
+                        </li>
+                      </ul>
+                    </div>
+                  )}
                 </h1>
+
+                <dialog id="my_modal_4" className="modal">
+                  <div className="modal-box w-11/12 max-w-5xl">
+                    <h3 className="font-bold text-lg pb-2">Update Event</h3>
+                    <UpdateEventForm
+                      eventData={event}
+                      onUpdate={handleUpdate}
+                    />
+
+                    <div className="modal-action"></div>
+                  </div>
+                </dialog>
+
+                <dialog id="my_modal_3" className="modal">
+                  <div className="modal-box">
+                    <form method="dialog">
+                      {/* if there is a button in form, it will close the modal */}
+                      <button className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">
+                        ✕
+                      </button>
+                    </form>
+                    <h3 className="font-bold text-lg">Confirmation</h3>
+                    <p className="py-4">
+                      Are you sure you want to delete this event?
+                    </p>
+                    <div className="flex justify-center">
+                      <button className="btn btn-error" onClick={handleDelete}>
+                        Confirm
+                      </button>
+                    </div>
+                  </div>
+                </dialog>
+
                 <div className=" text-sm leading-8 ">
                   <p className=" text-gray-900 font-semibold ">
                     {" "}
