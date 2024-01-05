@@ -60,7 +60,7 @@ export default function Discovery() {
           data-aos="fade-right"
           data-aos-delay="100"
         >
-          <div className="mx-auto max-w-2xl lg:mx-0">
+          <div className="mx-auto max-w-2xl lg:mx-0 px-5">
             <h2 className="text-4xl font-bold tracking-tight text-white sm:text-6xl">
               Get in touch with us
             </h2>

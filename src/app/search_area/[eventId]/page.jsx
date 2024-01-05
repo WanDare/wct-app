@@ -111,7 +111,7 @@ const EventDetail = ({ params }) => {
         {event && images && (
           <div className="event-details ">
             {/* images */}
-            <section className="border-b-2  ">
+            <section className="border-b-2 px-5">
               {event.images && (
                 <div className="Images bg-white py-10 container md:grid flex justify-center items-center flex-col grid-cols-1 gap-y-2 md:grid-cols-3 md:gap-5 mx-auto ">
                   {event.images.map((imageUrl, index) => (
@@ -134,7 +134,7 @@ const EventDetail = ({ params }) => {
               )}
             </section>
 
-            <section className="event-infos bg-zinc-100 pb-10">
+            <section className="event-infos bg-zinc-100 pb-10 px-5">
               {/* event name and shorthanded info (rating, location) */}
               <div className="event-shorthanded-info container mx-auto py-8 pl-5 md:pl-0 ">
                 <h1 className=" flex justify-between text-2xl md:text-3xl font-semibold text-gray-800">
