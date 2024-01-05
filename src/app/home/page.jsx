@@ -6,6 +6,7 @@ import Recentcard from "../components/recent_card";
 import Peoplelove from "../components/people_love";
 import Endfooter from "../components/end_widget";
 import SearchButton from "../components/search_Button";
+import "aos/dist/aos.css";
 
 const Home = () => {
   return (
@@ -18,10 +19,16 @@ const Home = () => {
         <div className="container mx-auto text-center">
           <img
             className="h-100 w-100 mx-auto"
+            data-aos="fade-up"
+            data-aos-delay="100"
             src={"/images/EventHunt.svg"}
             alt=""
           />
-          <div className="bg-white py-4 mx-48 rounded-lg drop-shadow-2xl">
+          <div
+            className="bg-white py-4 mx-48 rounded-lg drop-shadow-2xl"
+            data-aos="fade-up"
+            data-aos-delay="300"
+          >
             <ul
               className="flex flex-wrap font-bold gap-3 justify-center"
               style={{ color: "#4F4F4F" }}
@@ -145,7 +152,7 @@ const Home = () => {
           <Endfooter />
           <div className="text-center pt-10">
             <h1 className="text-xl p-2">Explore event with Event Finder</h1>
-            <a href="#link" className="text-sm text-blue-500">
+            <a className="text-sm text-blue-500">
               Discover new places and experiences
             </a>
           </div>
