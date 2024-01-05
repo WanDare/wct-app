@@ -1,20 +1,37 @@
 "use client";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
 // Define the UpdateEventForm component
 export default function UpdateEventForm({ eventData, onUpdate }) {
   // Initialize state for form data
   const [formData, setFormData] = useState({
-    title: eventData.title,
-    description: eventData.description,
-    costToJoin: eventData.costToJoin,
-    date: eventData.date,
-    time: eventData.time,
-    location_name: eventData.location_name,
-    location: eventData.location,
-    parkingSpace: eventData.parkingSpace,
-    type: eventData.eventType,
+    title: "",
+    description: "",
+    costToJoin: "",
+    date: "",
+    time: "",
+    location_name: "",
+    location: "",
+    parkingSpace: "",
+    type: "",
   });
+
+  // Update form data when eventData changes
+  useEffect(() => {
+    if (eventData) {
+      setFormData({
+        title: eventData.title || "",
+        description: eventData.description || "",
+        costToJoin: eventData.costToJoin || "",
+        date: eventData.date || "",
+        time: eventData.time || "",
+        location_name: eventData.location_name || "",
+        location: eventData.location || "",
+        parkingSpace: eventData.parkingSpace || "",
+        type: eventData.eventType || "",
+      });
+    }
+  }, [eventData]);
 
   // Handle input changes
   const handleInputChange = (e) => {
