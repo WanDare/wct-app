@@ -49,7 +49,7 @@ const Footer = () => {
               <h2 className="mb-6 text-sm font-semibold text-gray-900 uppercase dark:text-white">
                 Explore
               </h2>
-              <ul className="text-gray-500 dark:text-gray-400 font-medium">
+              <ul className="text-gray-500 dark:text-gray-400 font-medium text-justify">
                 <li className="mb-4">
                   <button
                     onClick={() => onClickPage("/search_area")}
@@ -63,7 +63,7 @@ const Footer = () => {
                     onClick={() => onClickPage("/search_area")}
                     className="hover:underline"
                   >
-                    What's happening this week
+                    Headlines this week
                   </button>
                 </li>
                 <li className="mb-4">

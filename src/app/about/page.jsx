@@ -74,7 +74,7 @@ const About = () => {
       </section>
 
       {/* why us */}
-      <section className="container mx-auto mb-10 pt-96 px-3">
+      <section className="container mx-auto mb-10 mt-24 pt-96 px-3">
         <div className="flex flex-col gap-5 lg:flex-row lg:items-start">
           <div
             className="lg:w-1/2 lg:pr-8 lg:order-1 relative"
@@ -86,7 +86,7 @@ const About = () => {
                 Our service statistics
               </h2>
               <div class="grid grid-cols-1 gap-5 sm:grid-cols-4 mt-4">
-                <div class="bg-white overflow-hidden shadow sm:rounded-lg">
+                <div class="bg-white overflow-hidden shadow rounded-lg">
                   <div class="px-4 py-5 sm:p-6">
                     <dl>
                       <dt class="text-sm leading-5 font-medium text-gray-500 truncate">
@@ -98,7 +98,7 @@ const About = () => {
                     </dl>
                   </div>
                 </div>
-                <div class="bg-white overflow-hidden shadow sm:rounded-lg">
+                <div class="bg-white overflow-hidden shadow rounded-lg">
                   <div class="px-4 py-5 sm:p-6">
                     <dl>
                       <dt class="text-sm leading-5 font-medium text-gray-500 truncate">
@@ -110,7 +110,7 @@ const About = () => {
                     </dl>
                   </div>
                 </div>
-                <div class="bg-white overflow-hidden shadow sm:rounded-lg">
+                <div class="bg-white overflow-hidden shadow rounded-lg">
                   <div class="px-4 py-5 sm:p-6">
                     <dl>
                       <dt class="text-sm leading-5 font-medium text-gray-500 truncate">
@@ -122,7 +122,7 @@ const About = () => {
                     </dl>
                   </div>
                 </div>
-                <div class="bg-white overflow-hidden shadow sm:rounded-lg">
+                <div class="bg-white overflow-hidden shadow rounded-lg">
                   <div class="px-4 py-5 sm:p-6">
                     <dl>
                       <dt class="text-sm leading-5 font-medium text-gray-500 truncate">
@@ -212,14 +212,14 @@ const About = () => {
         <h2 className="py-8 font-bold text-white text-4xl text-center">
           Our Team
         </h2>
-        <div className="flex flex-wrap justify-center gap-5 text-black text-center">
+        <div className="flex flex-wrap justify-center gap-5 text-black text-center px-5">
           <figure
             className="w-full sm:w-1/2 md:w-1/3 lg:w-1/4 xl:w-1/6 shadow-md bg-white rounded-lg"
             data-aos="fade-down"
             data-aos-delay="200"
           >
             <Image
-              className="rounded-t-lg h-80 w-full bg-cover bg-center"
+              className="rounded-t-lg h-80 w-full bg-cover bg-center object-cover"
               src="/images/lykhim.jpg"
               alt=""
               width={"800"}
@@ -234,7 +234,7 @@ const About = () => {
             data-aos-delay="300"
           >
             <Image
-              className="rounded-t-lg h-80 w-full bg-cover bg-center"
+              className="rounded-t-lg h-80 w-full bg-cover bg-center object-cover"
               src="/images/dara.jpg"
               alt=""
               width={"800"}
@@ -249,7 +249,7 @@ const About = () => {
             data-aos-delay="400"
           >
             <Image
-              className="rounded-t-lg h-80 w-full bg-cover bg-center"
+              className="rounded-t-lg h-80 w-full bg-cover bg-center object-cover"
               src="/images/srey.jpg"
               alt=""
               width={"800"}
@@ -264,7 +264,7 @@ const About = () => {
             data-aos-delay="500"
           >
             <Image
-              className="rounded-t-lg h-80 w-full bg-cover bg-center"
+              className="rounded-t-lg h-80 w-full bg-cover bg-center object-cover"
               src="/images/lay.jpg"
               alt=""
               width={"800"}

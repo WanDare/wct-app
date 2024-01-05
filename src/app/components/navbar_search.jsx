@@ -40,7 +40,7 @@ const NavbarSearch = (isHomepage) => {
       <div className="container mx-auto">
         <div className="flex items-center justify-between">
           <button onClick={() => onClickPage("/")}>
-            <div className="font-bold text-2xl pl-5">Event Hunt</div>
+            <div className="font-bold text-2xl pl-5 whitespace-nowrap">Event Hunt</div>
           </button>
 
           {/* Responsive Menu Button */}
