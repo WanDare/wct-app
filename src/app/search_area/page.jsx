@@ -11,7 +11,7 @@ const style = {
   page: `bg-customBlue`,
 };
 
-const Search = () => {
+export default function Search() {
   const [filteredEvents, setFilteredEvents] = useState([]);
   const [numberOfResults, setNumberOfResults] = useState(0);
   const [loading, setLoading] = useState(true);
@@ -42,7 +42,10 @@ const Search = () => {
   return (
     <div>
       <NavbarSearch />
-      <div className="pt-32 bg-no-repeat bg-cover bg-center" style={{ backgroundImage: "url('images/overcity.jpg')"}}>
+      <div
+        className="pt-32 bg-no-repeat bg-cover bg-center"
+        style={{ backgroundImage: "url('images/overcity.jpg')" }}
+      >
         <SearchArea onSearch={handleSearch} />
       </div>
       {loading ? (
@@ -54,6 +57,4 @@ const Search = () => {
       <Footer />
     </div>
   );
-};
-
-export default Search;
+}

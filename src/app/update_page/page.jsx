@@ -1,9 +1,10 @@
 "use client";
 import React, { useState } from "react";
 
-const UpdateEventForm = ({ eventData, onUpdate }) => {
+// Define the UpdateEventForm component
+export default function UpdateEventForm({ eventData, onUpdate }) {
+  // Initialize state for form data
   const [formData, setFormData] = useState({
-    // Initialize the form fields with event data
     title: eventData.title,
     description: eventData.description,
     costToJoin: eventData.costToJoin,
@@ -15,26 +16,28 @@ const UpdateEventForm = ({ eventData, onUpdate }) => {
     type: eventData.eventType,
   });
 
+  // Handle input changes
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     setFormData((prevData) => ({ ...prevData, [name]: value }));
   };
 
+  // Handle form submission
   const handleSubmit = (e) => {
     e.preventDefault();
-
     onUpdate(formData);
   };
 
+  // Return the form JSX
   return (
-    <form onSubmit={handleSubmit} className="flex flex-col ">
+    <form onSubmit={handleSubmit} className="flex flex-col">
       <div className="flex py-1 mb-5">
         <label className="pr-2 font-bold w-1/12">Title:</label>
         <input
           type="text"
           name="title"
           className="w-11/12"
-          placeholder={formData.title}
+          value={formData.title}
           onChange={handleInputChange}
         />
       </div>
@@ -44,7 +47,7 @@ const UpdateEventForm = ({ eventData, onUpdate }) => {
         <textarea
           className="textarea w-11/12"
           name="description"
-          placeholder={formData.description}
+          value={formData.description}
           onChange={handleInputChange}
         ></textarea>
       </div>
@@ -60,11 +63,11 @@ const UpdateEventForm = ({ eventData, onUpdate }) => {
           onChange={handleInputChange}
         >
           <option style={{ display: "none" }}>{formData.location_name}</option>
-          <option>Phnom Penh</option>
-          <option>Siem Reap</option>
-          <option>Sihanouk Vile</option>
-          <option>Battembong</option>
-          <option>Kompot</option>
+          <option value="Phnom Penh">Phnom Penh</option>
+          <option value="Siem Reap">Siem Reap</option>
+          <option value="Sihanouk Vile">Sihanouk Vile</option>
+          <option value="Battembong">Battembong</option>
+          <option value="Kompot">Kompot</option>
         </select>
 
         <div className="label">
@@ -126,13 +129,13 @@ const UpdateEventForm = ({ eventData, onUpdate }) => {
         <input
           type="date"
           className="input input-bordered w-6/12 max-w-xs"
-          // placeholder={formData.date}
+          value={formData.date}
           onChange={handleInputChange}
         />
         <input
           type="time"
           className="input input-bordered w-6/12 max-w-xs"
-          // placeholder={formData.time}
+          value={formData.time}
           onChange={handleInputChange}
         />
       </div>
@@ -143,6 +146,4 @@ const UpdateEventForm = ({ eventData, onUpdate }) => {
       </div>
     </form>
   );
-};
-
-export default UpdateEventForm;
+}

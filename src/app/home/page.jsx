@@ -8,7 +8,7 @@ import Endfooter from "../components/end_widget";
 import SearchButton from "../components/search_Button";
 import Image from "next/image";
 
-const Home = () => {
+export default function Home() {
   return (
     <div>
       <Navbar />
@@ -157,6 +157,4 @@ const Home = () => {
       <Footer />
     </div>
   );
-};
-
-export default Home;
+}
