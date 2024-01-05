@@ -1,21 +1,66 @@
 "use client";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
+import { db } from "@/app/firebaseConfig";
+import { getDocs, collection } from "firebase/firestore";
 
 const style = {
-  container: `bg-white mx-36 px-8 flex flex-col lg:flex-row justify-around w-full lg:w-6/12 my-8 p-3 rounded-lg shadow-xl`,
+  container: `bg-white text-black mx-36 px-8 flex flex-col lg:flex-row justify-around w-full lg:w-6/12 my-8 p-3 rounded-lg shadow-xl`,
   inputPart: `w-full lg:w-auto lg:flex-1 rounded flex items-center border p-2 mx-2 my-2 lg:my-0`,
   selectPart: ` appearance-none text-center outline-none bg-transparent w-full cursor-pointer`,
   btn: `p-2 rounded px-5 lg:btn  mt-2 lg:mt-0 lg:ml-2`,
 };
 
-const SearchArea = () => {
+const SearchArea = ({ onSearch }) => {
   const [selectedDate, setSelectedDate] = useState(null);
+  const [location, setLocation] = useState("");
+  const [eventType, setEventType] = useState("");
+  const [costToJoin, setCostToJoin] = useState("");
+  const [inputExists, setInputExists] = useState(false);
+  const [events, setEvents] = useState([]);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const eventsCollection = await getDocs(collection(db, "events"));
+        const eventData = eventsCollection.docs.map((doc) => ({
+          ...doc.data(),
+          id: doc.id,
+        }));
+        setEvents(eventData);
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      }
+    };
+
+    fetchData();
+  }, []);
+
+  const handleSearch = () => {
+    const filteredEvents = events.filter(
+      (event) =>
+        (!location || event.location_name === location) &&
+        (!eventType || event.eventType === eventType) &&
+        (!costToJoin || event.costToJoin === costToJoin) &&
+        (!selectedDate || new Date(event.date) >= selectedDate)
+    );
+
+    setInputExists(
+      location.trim() !== "" ||
+        eventType.trim() !== "" ||
+        costToJoin.trim() !== "" ||
+        selectedDate !== null
+    );
+
+    console.log("Filtered Events:", filteredEvents);
+
+    onSearch(filteredEvents);
+  };
 
   return (
     <div className="flex justify-center">
-      <form className={style.container}>
+      <form className={style.container} onSubmit={(e) => e.preventDefault()}>
         {/* Location */}
         <div className={style.inputPart}>
           <svg
@@ -38,7 +83,11 @@ const SearchArea = () => {
             />
           </svg>
 
-          <select className={style.selectPart}>
+          <select
+            className={style.selectPart}
+            value={location}
+            onChange={(e) => setLocation(e.target.value)}
+          >
             <option style={{ display: "none" }}>Location</option>
             <option>Phnom Penh</option>
             <option>Siem Reap</option>
@@ -89,7 +138,11 @@ const SearchArea = () => {
             />
           </svg>
 
-          <select className={style.selectPart}>
+          <select
+            className={style.selectPart}
+            value={eventType}
+            onChange={(e) => setEventType(e.target.value)}
+          >
             <option style={{ display: "none" }}>Type</option>
             <option>Entertainment</option>
             <option>Conferance</option>
@@ -113,14 +166,18 @@ const SearchArea = () => {
               d="M12 6v12m-3-2.818l.879.659c1.171.879 3.07.879 4.242 0 1.172-.879 1.172-2.303 0-3.182C13.536 12.219 12.768 12 12 12c-.725 0-1.45-.22-2.003-.659-1.106-.879-1.106-2.303 0-3.182s2.9-.879 4.006 0l.415.33M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
             />
           </svg>
-          <select className={style.selectPart}>
+          <select
+            className={style.selectPart}
+            value={costToJoin}
+            onChange={(e) => setCostToJoin(e.target.value)}
+          >
             <option style={{ display: "none" }}>Cost</option>
             <option value="Free">Free</option>
             <option value="Paid">Paid</option>
           </select>
         </div>
         {/* Button */}
-        <button className={style.btn}>
+        <button className={style.btn} onClick={handleSearch}>
           <svg
             xmlns="http://www.w3.org/2000/svg"
             fill="none"

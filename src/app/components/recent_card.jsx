@@ -1,65 +1,68 @@
 "use client";
 import { useEffect, useState } from "react";
-import { db } from "../firebaseConfig";
-import { doc, getDoc } from "firebase/firestore";
-import { getDownloadURL, list, ref } from "firebase/storage";
-import { storage } from "../firebaseConfig";
+import { getFirestore, collection, getDocs } from "firebase/firestore";
+import { getDownloadURL, ref, getStorage } from "firebase/storage";
 import { useRouter } from "next/navigation";
+import Description from "./Description";
 
 export default function Recentcard() {
-  const [imageUrls, setImageUrls] = useState([]);
-  const [eventData, setEventData] = useState([]);
   const router = useRouter();
+  const [events, setEvents] = useState([]);
 
   const onClickPage = (pathname) => {
     router.push(pathname);
   };
 
   useEffect(() => {
-    const featureRef = ref(storage, "Recent_event");
+    const fetchData = async () => {
+      try {
+        const db = getFirestore();
+        const eventsCollection = collection(db, "events");
+        const snapshot = await getDocs(eventsCollection);
 
-    // List all items in the directory
-    list(featureRef)
-      .then((result) => {
-        const promises = result.items.map((itemRef) => getDownloadURL(itemRef));
-        return Promise.all(promises);
-      })
-      .then((urls) => {
-        setImageUrls(urls);
-        fetchEventDataForEvents(urls);
-      })
-      .catch((error) => {
-        console.error("Error getting download URLs:", error);
-      });
+        const eventData = await Promise.all(
+          snapshot.docs.map(async (doc) => {
+            const data = doc.data();
+            const imageUrl = data.images[0];
+            const storage = getStorage();
+            const imageRef = ref(storage, imageUrl);
+            const imageUrlResolved = await getDownloadURL(imageRef);
+            return { ...data, imageUrl: imageUrlResolved, id: doc.id };
+          })
+        );
+
+        // Filter out events that have already passed
+        const currentDate = new Date();
+        const filteredEvents = eventData.filter((event) => {
+          const eventDate = new Date(event.date);
+          return eventDate >= currentDate;
+        });
+
+        // Sort remaining events by the time difference from the current date
+        const sortedEvents = filteredEvents.sort((a, b) => {
+          const dateA = new Date(a.date);
+          const dateB = new Date(b.date);
+
+          return Math.abs(dateA - currentDate) - Math.abs(dateB - currentDate);
+        });
+
+        // Select the top 3 closest events
+        const closestEvents = sortedEvents.slice(0, 3);
+
+        setEvents(closestEvents);
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      }
+    };
+
+    fetchData();
   }, []);
-
-  const fetchEventDataForEvents = async (urls) => {
-    try {
-      const eventDocRefs = urls.map((url, index) =>
-        doc(db, "feature_detail", `detailevent${index + 1}`)
-      );
-
-      const eventDocSnapshots = await Promise.all(
-        eventDocRefs.map((docRef) => getDoc(docRef))
-      );
-
-      const eventData = eventDocSnapshots.map((docSnapshot, index) => ({
-        id: docSnapshot.id,
-        ...docSnapshot.data(),
-        imageUrl: urls[index] || null,
-      }));
-
-      setEventData(eventData);
-    } catch (error) {
-      console.error("Error fetching data:", error);
-    }
-  };
 
   return (
     <div>
-      {imageUrls.length > 0 ? (
+      {events.length > 0 ? (
         <ul role="list" className="flex flex-wrap gap-3 justify-center">
-          {eventData.map((event, index) => (
+          {events.map((event, index) => (
             <li key={index}>
               <div className="items-center gap-x-6">
                 <div className="relative w-full rounded-xl overflow-hidden group">
@@ -77,15 +80,15 @@ export default function Recentcard() {
 
                   <div className="absolute top-0 w-full h-full p-10 text-white">
                     <div key={event.id}>
-                      <h2 className="text-2xl font-bold">{event.event}</h2>
-                      <p className="text-white group-hover:text-white">
-                        {event.description}
+                      <h2 className="text-2xl font-bold">{event.title}</h2>
+                      <p className="text-white pt-2 group-hover:text-white">
+                        <Description text={event.description} limit={25} />
                       </p>
                     </div>
                   </div>
                   <div
                     className="absolute bottom-10 left-10"
-                    onClick={() => onClickPage("/contact")}
+                    onClick={() => onClickPage(`/search_area/${event.id}`)}
                   >
                     <p className="font-bold cursor-pointer text-white transition duration-300 ease-in-out scale-50 translate-y-4 opacity-0 group-hover:-translate-y-1 group-hover:scale-100 group-hover:opacity-100 group-hover:delay-200">
                       Event Detail
