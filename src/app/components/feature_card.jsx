@@ -4,6 +4,7 @@ import { getFirestore, collection, getDocs } from "firebase/firestore";
 import { getDownloadURL, ref, getStorage } from "firebase/storage";
 import { useRouter } from "next/navigation";
 import Description from "./Description";
+import Image from "next/image";
 
 export default function Feature() {
   const router = useRouter();
@@ -61,9 +62,11 @@ export default function Feature() {
             <li key={index}>
               <div className="items-center gap-x-6">
                 <div className="relative w-72 rounded-xl shadow-lg overflow-hidden group">
-                  <img
+                  <Image
                     src={event.imageUrl}
                     alt={`Image ${index + 1}`}
+                    width={"300"}
+                    height={"100"}
                     className="bg-no-repeat bg-center h-52 duration-700 ease-in-out group-hover:scale-110"
                   />
                   <div className="absolute top-0 w-full h-full transition duration-300 opacity-50 rounded-lg group-hover:bg-black" />

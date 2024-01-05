@@ -2,6 +2,7 @@
 import React from "react";
 import { useEffect } from "react";
 import AOS from "aos";
+import Image from "next/image";
 import "aos/dist/aos.css"; // Import AOS CSS for styling
 import {
   DangerousOutlined,
@@ -26,13 +27,15 @@ const About = () => {
     <div style={{ backgroundColor: "#92c7e5" }}>
       <NavbarSearch />
       {/* About us */}
-      <section className="header-imgs">
+      <section className="header-Images">
         <div className="relative">
           <div className="w-full" data-aos="fade-in">
-            <img
+            <Image
               className="w-full bg-no-repeat bg-center"
-              src="images/team.jpg"
-              alt="img1"
+              src="/images/team.jpg"
+              alt="Image1"
+              width={"900"}
+              height={"100"}
             />
           </div>
           <div className="absolute inset-0 flex top-[80%] justify-center">
@@ -57,10 +60,12 @@ const About = () => {
                 </p>
               </div>
               <div className="">
-                <img
+                <Image
                   className="object-cover bg-center bg-cover h-full w-full rounded-r-xl"
                   src={"/images/ourwork.jpg"}
                   alt=""
+                  width={"800"}
+                  height={"100"}
                 />
               </div>
             </div>
@@ -213,10 +218,12 @@ const About = () => {
             data-aos="fade-down"
             data-aos-delay="200"
           >
-            <img
+            <Image
               className="rounded-t-lg h-80 w-full bg-cover bg-center"
-              src="images/lykhim.jpg"
+              src="/images/lykhim.jpg"
               alt=""
+              width={"800"}
+              height={"80"}
             />
             <div className="py-5 rounded-b-lg">Peng Lykhim</div>
           </figure>
@@ -226,10 +233,12 @@ const About = () => {
             data-aos="fade-up"
             data-aos-delay="300"
           >
-            <img
+            <Image
               className="rounded-t-lg h-80 w-full bg-cover bg-center"
-              src="images/dara.jpg"
+              src="/images/dara.jpg"
               alt=""
+              width={"800"}
+              height={"80"}
             />
             <div className="py-5 rounded-b-lg">Neth Wandara</div>
           </figure>
@@ -239,10 +248,12 @@ const About = () => {
             data-aos="fade-down"
             data-aos-delay="400"
           >
-            <img
+            <Image
               className="rounded-t-lg h-80 w-full bg-cover bg-center"
-              src="images/taliw.jpg"
+              src="/images/srey.jpg"
               alt=""
+              width={"800"}
+              height={"80"}
             />
             <div className="py-5 rounded-b-lg">Phon Sreypherk</div>
           </figure>
@@ -252,10 +263,12 @@ const About = () => {
             data-aos="fade-up"
             data-aos-delay="500"
           >
-            <img
+            <Image
               className="rounded-t-lg h-80 w-full bg-cover bg-center"
-              src="images/lay.jpg"
+              src="/images/lay.jpg"
               alt=""
+              width={"800"}
+              height={"80"}
             />
             <div className="py-5 rounded-b-lg">Pann Senglay</div>
           </figure>

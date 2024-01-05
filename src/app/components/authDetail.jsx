@@ -1,9 +1,11 @@
+"use client";
 import React, { useEffect, useState } from "react";
 import { auth } from "../firebaseConfig";
 import { onAuthStateChanged, signOut } from "firebase/auth";
 import { useRouter } from "next/navigation";
+import Image from "next/image";
 
-export const currentUserId = () => {
+export const useAuth = () => {
   const [authUser, setAuthUser] = useState(null);
 
   useEffect(() => {
@@ -59,9 +61,11 @@ const AuthDetail = () => {
               tabIndex={0}
               role="button"
             >
-              <img
+              <Image
                 src="https://icon-library.com/images/default-user-icon/default-user-icon-13.jpg"
                 alt="User Avatar"
+                width={"100"}
+                height={"100"}
               />
             </div>
             <ul

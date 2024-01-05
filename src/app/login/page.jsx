@@ -4,7 +4,7 @@ import { useRouter } from "next/navigation";
 import { auth } from "../firebaseConfig";
 import { signInWithEmailAndPassword } from "firebase/auth";
 
-export default function login() {
+export default function Login() {
   const router = useRouter();
   const onClickPage = (pathname) => {
     router.push(pathname);

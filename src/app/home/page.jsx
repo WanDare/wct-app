@@ -6,6 +6,7 @@ import Recentcard from "../components/recent_card";
 import Peoplelove from "../components/people_love";
 import Endfooter from "../components/end_widget";
 import SearchButton from "../components/search_Button";
+import Image from "next/image";
 
 const Home = () => {
   return (
@@ -16,10 +17,12 @@ const Home = () => {
         style={{ backgroundImage: "url('/images/festival.jpg')" }}
       >
         <div className="container mx-auto text-center">
-          <img
+          <Image
             className="h-100 w-100 mx-auto"
             src={"/images/EventHunt.svg"}
             alt=""
+            width={"550"}
+            height={"100"}
           />
           <div className="bg-white py-4 mx-48 rounded-lg drop-shadow-2xl">
             <ul
