@@ -1,4 +1,7 @@
 import React from "react";
+import AOS from 'aos';
+import { useRouter } from "next/navigation";
+import { auth } from "../firebaseConfig";
 
 const EndWidget = [
   {
@@ -8,6 +11,20 @@ const EndWidget = [
 ];
 
 const Endfooter = () => {
+  const router = useRouter();
+
+  const onClickPage = () => {
+    const user = auth.currentUser;
+
+    if (user) {
+      // User is logged in, navigate to /post_page
+      router.push("/post_page");
+    } else {
+      // User is not logged in, navigate to /login
+      router.push("/login");
+    }
+  };
+
   return (
     <div>
       <ul role="list" className="">
@@ -23,10 +40,14 @@ const Endfooter = () => {
               }}
             >
               <div className="text-start p-14">
-                <h3 className="text-3xl leading-7 tracking-tight text-white pb-7">
+                <h3 className="text-3xl leading-7 tracking-tight text-white pb-7" data-aos="fade-left" data-aos-delay="100">
                   {EndWidget.event}
                 </h3>
-                <button className="flex-initial w-32 bg-blue-500 p-3 rounded-lg drop-shadow-2xl text-white hover:bg-blue-600">
+                <button
+                  className="flex-initial w-32 bg-blue-500 p-3 rounded-lg drop-shadow-2xl text-white hover:bg-blue-600"
+                  data-aos="fade-left" data-aos-delay="200"
+                  onClick={onClickPage}
+                >
                   Post event
                 </button>
               </div>

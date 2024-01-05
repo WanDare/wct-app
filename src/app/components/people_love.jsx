@@ -1,79 +1,105 @@
 "use client";
-import React from "react";
+import { useEffect, useState } from "react";
+import { getFirestore, collection, getDocs } from "firebase/firestore";
+import { getDownloadURL, ref, getStorage } from "firebase/storage";
 import { useRouter } from "next/navigation";
+import Description from "./Description";
 
-const Eventcard = [
-  {
-    event: "Event 1",
-    description: "Short description",
-    imageUrl: "/images/Rectangle1.png",
-  },
-  {
-    event: "Event 2",
-    description: "Short description",
-    imageUrl: "/images/Rectangle2.png",
-  },
-  {
-    event: "Event 3",
-    description: "Short description",
-    imageUrl: "/images/Rectangle3.png",
-  },
-  {
-    event: "Event 4",
-    description: "Short description",
-    imageUrl: "/images/Rectangle4.png",
-  },
-  {
-    event: "Event 5",
-    description: "Short description",
-    imageUrl: "/images/Rectangle1.png",
-  },
-];
-
-const Peoplelove = () => {
+export default function Peoplelove() {
   const router = useRouter();
+  const [events, setEvents] = useState([]);
 
   const onClickPage = (pathname) => {
     router.push(pathname);
   };
 
+  //will change to sort by rating later
+  function shuffleArray(array) {
+    const shuffledArray = [...array];
+    for (let i = shuffledArray.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [shuffledArray[i], shuffledArray[j]] = [
+        shuffledArray[j],
+        shuffledArray[i],
+      ];
+    }
+    return shuffledArray;
+  }
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const db = getFirestore();
+        const eventsCollection = collection(db, "events");
+        const snapshot = await getDocs(eventsCollection);
+        const shuffledDocs = shuffleArray(snapshot.docs);
+        const selectedDocs = shuffledDocs.slice(0, 5);
+
+        const eventData = await Promise.all(
+          selectedDocs.map(async (doc) => {
+            const data = doc.data();
+            const imageUrl = data.images[0];
+            const storage = getStorage();
+            const imageRef = ref(storage, imageUrl);
+            const imageUrlResolved = await getDownloadURL(imageRef);
+            return { ...data, imageUrl: imageUrlResolved, id: doc.id };
+          })
+        );
+
+        setEvents(eventData);
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      }
+    };
+
+    fetchData();
+  }, []);
+
   return (
     <div>
-      <ul role="list" className="flex flex-wrap gap-3 justify-center">
-        {Eventcard.map((Eventcard) => (
-          <li key={Eventcard.event}>
-            <div className="items-center gap-x-6">
-              <div className="relative w-full rounded-xl overflow-hidden group ">
-                <img
-                  className="object-cover w-100 h-100 rounded-lg duration-700 ease-in-out group-hover:scale-110"
-                  src={Eventcard.imageUrl}
-                  alt=""
-                />
-                <div className="absolute top-0 w-full h-full transition duration-300 opacity-50 rounded-lg group-hover:bg-black" />
+      {events.length > 0 ? (
+        <ul role="list" className="flex flex-wrap gap-3 justify-center">
+          {events.map((event, index) => (
+            <li key={index}>
+              <div className="items-center gap-x-6">
+                <div className="relative w-72 rounded-xl shadow-lg  overflow-hidden group">
+                  <img
+                    src={event.imageUrl}
+                    alt={`Image ${index + 1}`}
+                    className="bg-no-repeat bg-center h-52 duration-700 ease-in-out group-hover:scale-110"
+                  />
+                  <div className="absolute top-0 w-full h-full transition duration-300 opacity-50 rounded-lg group-hover:bg-black" />
 
-                <div className="absolute right-0 duration-300 transform -translate-x-1/2 -translate-y-1/2 left-1/2 -bottom-20 group-hover:bottom-5">
-                  <button
-                    onClick={() => onClickPage("/contact")}
-                    className="h-10 px-8 font-normal bg-white border-none rounded-full btn btn-sm hover:bg-black hover:text-white"
+                  <div
+                    className="absolute right-0 duration-300 transform -translate-x-1/2 -translate-y-1/2 left-1/2 -bottom-20 group-hover:bottom-5"
+                    onClick={() => onClickPage(`/search_area/${event.id}`)}
                   >
-                    Event View
-                  </button>
+                    <button className="h-10 px-8 font-normal bg-white border-none rounded-full btn btn-sm hover:bg-black hover:text-white">
+                      Event View
+                    </button>
+                  </div>
                 </div>
               </div>
-              <div>
-                <h3 className="text-base font-semibold leading-7 tracking-tight text-gray-900">
-                  {Eventcard.event}
-                </h3>
-                <p className="text-sm font-semibold leading-6 text-indigo-600">
-                  {Eventcard.description}
-                </p>
+              <div className="mb-4">
+                <div key={event.id} className="">
+                  <h2 className="font-bold">{event.title}</h2>
+                  <Description text={event.description} limit={4} />
+                </div>
               </div>
+            </li>
+          ))}
+        </ul>
+      ) : (
+        <div className="flex flex-wrap gap-12">
+          {Array.from({ length: 5 }, (_, index) => (
+            <div key={index} className="flex flex-col gap-4 w-64">
+              <div className="skeleton h-56 w-72"></div>
+              <div className="skeleton h-4 w-28"></div>
+              <div className="skeleton h-4 w-full"></div>
             </div>
-          </li>
-        ))}
-      </ul>
+          ))}
+        </div>
+      )}
     </div>
   );
-};
-
-export default Peoplelove;
+}
