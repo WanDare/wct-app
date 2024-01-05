@@ -1,6 +1,12 @@
+"use client";
 import React from "react";
+import { useRouter } from "next/navigation";
 
 const Footer = () => {
+  const router = useRouter();
+  const onClickPage = (pathname) => {
+    router.push(pathname);
+  };
   return (
     <footer>
       <div className="container mx-auto">
@@ -11,43 +17,73 @@ const Footer = () => {
           <ul>
             <div className="text-black font-bold pb-2">Event Hunt</div>
             <li>
-              <a href="#link">Your next goto companion for finding event</a>
+              <p>Your next goto companion for finding event</p>
             </li>
           </ul>
           <ul>
             <div className="text-black font-bold pb-2">Team</div>
             <li>
-              <a href="#link">About</a>
+              <button
+                className="hover:text-black"
+                onClick={() => onClickPage("/about")}
+              >
+                About
+              </button>
             </li>
             <li>
-              <a href="#link">Contact us</a>
+              <button
+                className="hover:text-black"
+                onClick={() => onClickPage("/discovery")}
+              >
+                Contact us
+              </button>
             </li>
           </ul>
           <ul>
             <div className="text-black font-bold pb-2">Explore</div>
             <li>
-              <a href="#link">Feature event</a>
+              <button
+                className="hover:text-black"
+                onClick={() => onClickPage("/search_area")}
+              >
+                Feature event
+              </button>
             </li>
             <li>
-              <a href="#link">What's happening this week</a>
+              <button
+                className="hover:text-black"
+                onClick={() => onClickPage("/search_area")}
+              >
+                What's happening this week
+              </button>
             </li>
             <li>
-              <a href="#link">What's people love</a>
+              <button
+                className="hover:text-black"
+                onClick={() => onClickPage("/search_area")}
+              >
+                What's people love
+              </button>
             </li>
           </ul>
           <ul>
             <div className="text-black font-bold pb-2">Terms and Policies</div>
-            <li>
+            <li className="hover:text-black">
               <a href="#link">Privacy Policy</a>
             </li>
-            <li>
+            <li className="hover:text-black">
               <a href="#link">Terms of use</a>
             </li>
           </ul>
           <ul>
             <div className="text-black font-bold pb-2">Help</div>
             <li>
-              <a href="#link">Support</a>
+              <button
+                className="hover:text-black"
+                onClick={() => onClickPage("/discovery")}
+              >
+                Support
+              </button>
             </li>
           </ul>
         </div>
