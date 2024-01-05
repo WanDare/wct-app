@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import { getFirestore, collection, getDocs } from "firebase/firestore";
 import { getDownloadURL, ref, getStorage } from "firebase/storage";
 import { useRouter } from "next/navigation";
+import Description from "./Description";
 
 export default function Feature() {
   const router = useRouter();
@@ -31,7 +32,7 @@ export default function Feature() {
         const eventsCollection = collection(db, "events");
         const snapshot = await getDocs(eventsCollection);
         const shuffledDocs = shuffleArray(snapshot.docs);
-        const selectedDocs = shuffledDocs.slice(0, 4);
+        const selectedDocs = shuffledDocs.slice(0, 5);
         const eventData = await Promise.all(
           selectedDocs.map(async (doc) => {
             const data = doc.data();
@@ -59,11 +60,11 @@ export default function Feature() {
           {events.map((event, index) => (
             <li key={index}>
               <div className="items-center gap-x-6">
-                <div className="relative w-2/12 rounded-xl overflow-hidden group">
+                <div className="relative w-72 rounded-xl shadow-lg overflow-hidden group">
                   <img
                     src={event.imageUrl}
                     alt={`Image ${index + 1}`}
-                    className="object-cover h-52 rounded-lg duration-700 ease-in-out group-hover:scale-110"
+                    className="bg-no-repeat bg-center h-52 duration-700 ease-in-out group-hover:scale-110"
                   />
                   <div className="absolute top-0 w-full h-full transition duration-300 opacity-50 rounded-lg group-hover:bg-black" />
 
@@ -79,8 +80,8 @@ export default function Feature() {
               </div>
               <div className="mb-4">
                 <div key={event.id} className="">
-                  <h2 className="font-bold">{event.event}</h2>
-                  <p>{event.description}</p>
+                  <h2 className="font-bold truncate ...">{event.title}</h2>
+                  <Description text={event.description} limit={4} />
                 </div>
               </div>
             </li>

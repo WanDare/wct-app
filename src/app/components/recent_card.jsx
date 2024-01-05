@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import { getFirestore, collection, getDocs } from "firebase/firestore";
 import { getDownloadURL, ref, getStorage } from "firebase/storage";
 import { useRouter } from "next/navigation";
+import Description from "./Description";
 
 export default function Recentcard() {
   const router = useRouter();
@@ -79,9 +80,9 @@ export default function Recentcard() {
 
                   <div className="absolute top-0 w-full h-full p-10 text-white">
                     <div key={event.id}>
-                      <h2 className="text-2xl font-bold">{event.event}</h2>
+                      <h2 className="text-2xl font-bold">{event.title}</h2>
                       <p className="text-white group-hover:text-white">
-                        {event.description}
+                        <Description text={event.description} limit={25} />
                       </p>
                     </div>
                   </div>
