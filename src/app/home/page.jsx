@@ -24,7 +24,7 @@ export default function Home() {
             width={"550"}
             height={"100"}
           />
-          <div className="flex justify-center items-center px-4">
+          <div className="flex justify-center items-center px-8">
             <div className="bg-white py-4 px-4 max-w-screen-xl rounded-lg drop-shadow-2xl mx-auto">
               <ul
                 className="flex flex-wrap font-bold gap-3 justify-center"

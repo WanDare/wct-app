@@ -4,11 +4,13 @@ import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import { db } from "@/app/firebaseConfig";
 import { getDocs, collection } from "firebase/firestore";
+import SearchButton from "../search_Button";
+import SearchFunction from "../search_Function";
 
 const style = {
-  container: `bg-white text-black mx-36 px-8 flex flex-col lg:flex-row justify-around w-full lg:w-6/12 my-8 p-3 rounded-lg shadow-xl`,
-  inputPart: `w-full lg:w-auto lg:flex-1 rounded flex items-center border p-2 mx-2 my-2 lg:my-0`,
-  selectPart: ` appearance-none text-center outline-none bg-transparent w-full cursor-pointer`,
+  container: `flex flex-wrap font-bold gap-3 justify-center items-center px-24 bg-white text-black mx-32  justify-around w-full max-w-screen-xl my-8 py-4 rounded-lg shadow-xl`,
+  inputPart: `flex bg-gray-200 flex-initial font-bold justify-center w-52 p-5 rounded-lg hover:text-black`,
+  selectPart: `appearance-none text-center outline-none bg-transparent w-full cursor-pointer`,
   btn: `p-2 rounded px-5 lg:btn  mt-2 lg:mt-0 lg:ml-2`,
 };
 
@@ -59,8 +61,11 @@ const SearchArea = ({ onSearch }) => {
   };
 
   return (
-    <div className="flex justify-center">
-      <form className={style.container} onSubmit={(e) => e.preventDefault()}>
+    <div className="flex justify-center items-center px-8 py-10 list-none">
+      <form
+        className="flex flex-wrap justify-center font-bold gap-3 bg-white py-4 px-4 max-w-screen-xl rounded-lg drop-shadow-2xl mx-auto"
+        onSubmit={(e) => e.preventDefault()}
+      >
         {/* Location */}
         <div className={style.inputPart}>
           <svg
@@ -177,23 +182,7 @@ const SearchArea = ({ onSearch }) => {
           </select>
         </div>
         {/* Button */}
-        <button className={style.btn} onClick={handleSearch}>
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            fill="none"
-            viewBox="0 0 24 24"
-            strokeWidth="1.5"
-            stroke="currentColor"
-            className="w-6 h-6 hidden lg:inline-block"
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z"
-            />
-          </svg>
-          <span className="lg:hidden btn btn-success">Search</span>
-        </button>
+        <SearchFunction onSearch={handleSearch} />
       </form>
     </div>
   );
