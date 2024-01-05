@@ -9,7 +9,7 @@ import { getAuth, onAuthStateChanged } from "firebase/auth";
 import Image from "next/image";
 
 const style = {
-  container: `bg-[#F2F2F2] w-4/12 flex flex-col items-center rounded-lg p-5 mt-10 m-5`,
+  container: `bg-[#F2F2F2] w-4/12 flex flex-col items-center rounded-lg p-5 mt-14 m-5`,
   previewContainer: `mt-4`,
   previewImage: `w-20 h-20 object-cover mr-2 mb-2 rounded`,
 };

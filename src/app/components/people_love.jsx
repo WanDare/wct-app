@@ -93,7 +93,7 @@ export default function Peoplelove() {
           ))}
         </ul>
       ) : (
-        <div className="flex flex-wrap gap-12">
+        <div className="flex flex-wrap gap-12 justify-center">
           {Array.from({ length: 5 }, (_, index) => (
             <div key={index} className="flex flex-col gap-4 w-64">
               <div className="skeleton h-56 w-72"></div>
