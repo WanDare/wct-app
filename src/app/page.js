@@ -2,16 +2,15 @@ import Navbar from './components/Navbar';
 import Footer from './components/Footer';
 import Hero from './pages/home';
 import EventDetail from './pages/Detail';
-import Test from './pages/test';
+import About from './pages/about';
 
 
 function Home() {
   return (
     <div>
-      <Navbar/>
-      {/* <Test /> */}
-      <EventDetail />
+      {/* <EventDetail /> */}
       {/* <Hero/> */}
+      <About />
       <Footer/>
     </div>
   );
