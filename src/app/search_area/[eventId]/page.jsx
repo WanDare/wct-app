@@ -2,11 +2,8 @@
 import {
   AttachMoney,
   DateRange,
-  People,
   PlaceOutlined,
-  Router,
   Segment,
-  Timelapse,
   TimeToLeave, //use parking instead of number of participant ** car replace people icon
 } from "@mui/icons-material";
 import {
@@ -17,19 +14,19 @@ import {
   deleteDoc,
 } from "firebase/firestore";
 import { useEffect, useState } from "react";
-import { db, storage } from "../../firebaseConfig";
+import { db } from "../../firebaseConfig";
 import { ref, getDownloadURL, getStorage } from "firebase/storage";
 import Navbar from "../../components/navbar";
 import Footer from "../../components/footer";
-import { data } from "autoprefixer";
 import { images } from "../../../../next.config";
-import { currentUserId } from "@/app/components/authDetail";
+import { useAuth } from "@/app/components/authDetail";
 import UpdateEventForm from "@/app/update_page/page";
 import { useRouter } from "next/navigation";
+import Image from "next/image";
 
 const EventDetail = ({ params }) => {
   const router = useRouter();
-  const currentUser = currentUserId();
+  const currentUser = useAuth();
 
   // states of data
   const [event, setEvent] = useState(null);
@@ -114,11 +111,11 @@ const EventDetail = ({ params }) => {
         {event && images && (
           <div className="event-details ">
             {/* images */}
-            <section className="border-b-2  ">
+            <section className="border-b-2 px-5">
               {event.images && (
                 <div className="Images bg-white py-10 container md:grid flex justify-center items-center flex-col grid-cols-1 gap-y-2 md:grid-cols-3 md:gap-5 mx-auto ">
                   {event.images.map((imageUrl, index) => (
-                    <img
+                    <Image
                       key={index}
                       className={`shadow-${
                         index === 0 ? "xl" : "lg"
@@ -129,13 +126,15 @@ const EventDetail = ({ params }) => {
                       } md:w-full md:h-full object-cover md:rounded-lg sm:rounded-md`}
                       src={imageUrl}
                       alt={`Image ${index + 1}`}
+                      width={"800"}
+                      height={"100"}
                     />
                   ))}
                 </div>
               )}
             </section>
 
-            <section className="event-infos bg-zinc-100 pb-10">
+            <section className="event-infos bg-zinc-100 pb-10 px-5">
               {/* event name and shorthanded info (rating, location) */}
               <div className="event-shorthanded-info container mx-auto py-8 pl-5 md:pl-0 ">
                 <h1 className=" flex justify-between text-2xl md:text-3xl font-semibold text-gray-800">

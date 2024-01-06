@@ -1,12 +1,14 @@
+"use client";
 import React, { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { getFirestore, collection, getDocs } from "firebase/firestore";
 import { getStorage, ref, getDownloadURL } from "firebase/storage";
+import Image from "next/image";
 
 const style = {
   container: `flex flex-col mx-4 lg:mx-20 mt-5 border rounded-md bg-white shadow-lg`,
   secondContainer: `flex flex-col lg:flex-row p-4`,
-  img: `w-full lg:w-4/12 rounded-md lg:mr-4`,
+  Image: `w-full lg:w-4/12 rounded-md lg:mr-4`,
   content: `mt-4 lg:mt-0 lg:ml-4`,
   btn: `btn btn-outline btn-info mt-4 lg:mt-20`,
 };
@@ -87,7 +89,13 @@ function ResultCard({ filteredEvents }) {
           events.map((event, index) => (
             <div key={index} className={style.container}>
               <div className={style.secondContainer}>
-                <img src={event.imageUrl} className={style.img} />
+                <Image
+                  src={event.imageUrl}
+                  className={style.Image}
+                  alt=""
+                  width={"400"}
+                  height={"100"}
+                />
                 <div className={style.content}>
                   <h1 className="text-xl font-bold">{event.title}</h1>
                   <p className="mt-2 lg:mt-4">{event.description}</p>

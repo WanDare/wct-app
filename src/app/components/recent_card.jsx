@@ -4,6 +4,7 @@ import { getFirestore, collection, getDocs } from "firebase/firestore";
 import { getDownloadURL, ref, getStorage } from "firebase/storage";
 import { useRouter } from "next/navigation";
 import Description from "./Description";
+import Image from "next/image";
 
 export default function Recentcard() {
   const router = useRouter();
@@ -66,9 +67,11 @@ export default function Recentcard() {
             <li key={index}>
               <div className="items-center gap-x-6">
                 <div className="relative w-full rounded-xl overflow-hidden group">
-                  <img
+                  <Image
                     src={event.imageUrl}
                     alt={`Image ${index + 1}`}
+                    width={"300"}
+                    height={"100"}
                     className="flex flex-col h-80 w-96 gap-y-2"
                     style={{
                       backgroundSize: "cover",

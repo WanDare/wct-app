@@ -8,7 +8,7 @@ import NavbarSearch from "../components/navbar_search";
 const style = {
   page: `bg-customBlue`,
 };
-const Search = () => {
+export default function Search() {
   return (
     <div>
       <NavbarSearch />
@@ -22,6 +22,4 @@ const Search = () => {
       <Footer />
     </div>
   );
-};
-
-export default Search;
+}

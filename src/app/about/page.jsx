@@ -2,6 +2,7 @@
 import React from "react";
 import { useEffect } from "react";
 import AOS from "aos";
+import Image from "next/image";
 import "aos/dist/aos.css"; // Import AOS CSS for styling
 import {
   DangerousOutlined,
@@ -26,13 +27,15 @@ const About = () => {
     <div style={{ backgroundColor: "#92c7e5" }}>
       <NavbarSearch />
       {/* About us */}
-      <section className="header-imgs">
+      <section className="header-Images">
         <div className="relative">
           <div className="w-full" data-aos="fade-in">
-            <img
+            <Image
               className="w-full bg-no-repeat bg-center"
-              src="images/team.jpg"
-              alt="img1"
+              src="/images/team.jpg"
+              alt="Image1"
+              width={"900"}
+              height={"100"}
             />
           </div>
           <div className="absolute inset-0 flex top-[80%] justify-center">
@@ -57,10 +60,12 @@ const About = () => {
                 </p>
               </div>
               <div className="">
-                <img
+                <Image
                   className="object-cover bg-center bg-cover h-full w-full rounded-r-xl"
                   src={"/images/ourwork.jpg"}
                   alt=""
+                  width={"800"}
+                  height={"100"}
                 />
               </div>
             </div>
@@ -69,7 +74,7 @@ const About = () => {
       </section>
 
       {/* why us */}
-      <section className="container mx-auto mb-10 pt-96 px-3">
+      <section className="container mx-auto mb-10 mt-24 pt-96 px-3">
         <div className="flex flex-col gap-5 lg:flex-row lg:items-start">
           <div
             className="lg:w-1/2 lg:pr-8 lg:order-1 relative"
@@ -81,7 +86,7 @@ const About = () => {
                 Our service statistics
               </h2>
               <div class="grid grid-cols-1 gap-5 sm:grid-cols-4 mt-4">
-                <div class="bg-white overflow-hidden shadow sm:rounded-lg">
+                <div class="bg-white overflow-hidden shadow rounded-lg">
                   <div class="px-4 py-5 sm:p-6">
                     <dl>
                       <dt class="text-sm leading-5 font-medium text-gray-500 truncate">
@@ -93,7 +98,7 @@ const About = () => {
                     </dl>
                   </div>
                 </div>
-                <div class="bg-white overflow-hidden shadow sm:rounded-lg">
+                <div class="bg-white overflow-hidden shadow rounded-lg">
                   <div class="px-4 py-5 sm:p-6">
                     <dl>
                       <dt class="text-sm leading-5 font-medium text-gray-500 truncate">
@@ -105,7 +110,7 @@ const About = () => {
                     </dl>
                   </div>
                 </div>
-                <div class="bg-white overflow-hidden shadow sm:rounded-lg">
+                <div class="bg-white overflow-hidden shadow rounded-lg">
                   <div class="px-4 py-5 sm:p-6">
                     <dl>
                       <dt class="text-sm leading-5 font-medium text-gray-500 truncate">
@@ -117,7 +122,7 @@ const About = () => {
                     </dl>
                   </div>
                 </div>
-                <div class="bg-white overflow-hidden shadow sm:rounded-lg">
+                <div class="bg-white overflow-hidden shadow rounded-lg">
                   <div class="px-4 py-5 sm:p-6">
                     <dl>
                       <dt class="text-sm leading-5 font-medium text-gray-500 truncate">
@@ -207,16 +212,18 @@ const About = () => {
         <h2 className="py-8 font-bold text-white text-4xl text-center">
           Our Team
         </h2>
-        <div className="flex flex-wrap justify-center gap-5 text-black text-center">
+        <div className="flex flex-wrap justify-center gap-5 text-black text-center px-5">
           <figure
             className="w-full sm:w-1/2 md:w-1/3 lg:w-1/4 xl:w-1/6 shadow-md bg-white rounded-lg"
             data-aos="fade-down"
             data-aos-delay="200"
           >
-            <img
-              className="rounded-t-lg h-80 w-full bg-cover bg-center"
-              src="images/lykhim.jpg"
+            <Image
+              className="rounded-t-lg h-80 w-full bg-cover bg-center object-cover"
+              src="/images/lykhim.jpg"
               alt=""
+              width={"800"}
+              height={"80"}
             />
             <div className="py-5 rounded-b-lg">Peng Lykhim</div>
           </figure>
@@ -226,10 +233,12 @@ const About = () => {
             data-aos="fade-up"
             data-aos-delay="300"
           >
-            <img
-              className="rounded-t-lg h-80 w-full bg-cover bg-center"
-              src="images/dara.jpg"
+            <Image
+              className="rounded-t-lg h-80 w-full bg-cover bg-center object-cover"
+              src="/images/dara.jpg"
               alt=""
+              width={"800"}
+              height={"80"}
             />
             <div className="py-5 rounded-b-lg">Neth Wandara</div>
           </figure>
@@ -239,10 +248,12 @@ const About = () => {
             data-aos="fade-down"
             data-aos-delay="400"
           >
-            <img
-              className="rounded-t-lg h-80 w-full bg-cover bg-center"
-              src="images/taliw.jpg"
+            <Image
+              className="rounded-t-lg h-80 w-full bg-cover bg-center object-cover"
+              src="/images/srey.jpg"
               alt=""
+              width={"800"}
+              height={"80"}
             />
             <div className="py-5 rounded-b-lg">Phon Sreypherk</div>
           </figure>
@@ -252,10 +263,12 @@ const About = () => {
             data-aos="fade-up"
             data-aos-delay="500"
           >
-            <img
-              className="rounded-t-lg h-80 w-full bg-cover bg-center"
-              src="images/lay.jpg"
+            <Image
+              className="rounded-t-lg h-80 w-full bg-cover bg-center object-cover"
+              src="/images/lay.jpg"
               alt=""
+              width={"800"}
+              height={"80"}
             />
             <div className="py-5 rounded-b-lg">Pann Senglay</div>
           </figure>

@@ -2,7 +2,7 @@
 import React, { useState } from "react";
 import { useRouter } from "next/navigation";
 
-export default function resetpw() {
+export default function Resetpw() {
   const router = useRouter();
   const onClickPage = (pathname) => {
     router.push(pathname);

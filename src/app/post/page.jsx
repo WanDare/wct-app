@@ -2,6 +2,7 @@
 import React, { useState } from "react";
 import Navbar from "../components/navbar";
 import Footer from "../components/footer";
+import Image from "next/image";
 
 const style = {
   container: `bg-[#F2F2F2] w-4/12 flex flex-col items-center rounded-lg p-5 mt-10`,
@@ -94,10 +95,12 @@ export default function Post() {
 
           <div className={style.previewContainer}>
             {selectedFiles.map((file, index) => (
-              <img
+              <Image
                 key={index}
                 src={URL.createObjectURL(file)}
                 alt={`Preview ${index + 1}`}
+                width={"100"}
+                height={"100"}
                 className={style.previewImage}
               />
             ))}
