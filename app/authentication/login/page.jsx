@@ -1,7 +1,7 @@
 "use client";
 import React, { useState } from "react";
 import { useRouter } from "next/navigation";
-import { auth } from "../firebaseConfig";
+import { auth } from "../../firebaseConfig";
 import { signInWithEmailAndPassword } from "firebase/auth";
 
 export default function Login() {
@@ -23,7 +23,7 @@ export default function Login() {
     e.preventDefault();
     signInWithEmailAndPassword(auth, email, password)
       .then((userCredential) => {
-        router.push("/");
+        router.push("/home");
         console.log(userCredential);
       })
       .catch((error) => {
@@ -37,7 +37,7 @@ export default function Login() {
       <nav>
         <button
           className="font-bold text-2xl ml-10 mt-5"
-          onClick={() => onClickPage("/")}
+          onClick={() => onClickPage("/home")}
         >
           Event Hunt
         </button>
@@ -118,7 +118,7 @@ export default function Login() {
                 <span className="label-text-alt"></span>
                 <button
                   className="label-text-alt mt-3 text-sky-600"
-                  onClick={() => onClickPage("/resetpw")}
+                  onClick={() => onClickPage("/authentication/resetpw")}
                 >
                   Forget Password?
                 </button>
@@ -134,7 +134,7 @@ export default function Login() {
             <span>Dont have an account? </span>
             <button
               className="text-sky-600"
-              onClick={() => onClickPage("/register")}
+              onClick={() => onClickPage("/authentication/register")}
             >
               Register
             </button>

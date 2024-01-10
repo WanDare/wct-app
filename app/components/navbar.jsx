@@ -39,8 +39,10 @@ const Navbar = (isHomepage) => {
     >
       <div className="container mx-auto">
         <div className="flex items-center justify-between">
-          <button onClick={() => onClickPage("/")}>
-            <div className="text-black font-bold text-2xl pl-5 whitespace-nowrap">Event Hunt</div>
+          <button onClick={() => onClickPage("/home")}>
+            <div className="text-black font-bold text-2xl pl-5 whitespace-nowrap">
+              Event Hunt
+            </div>
           </button>
 
           {/* Responsive Menu Button */}
@@ -72,7 +74,7 @@ const Navbar = (isHomepage) => {
             <li>
               <button
                 className="hover:text-black"
-                onClick={() => onClickPage("/")}
+                onClick={() => onClickPage("/home")}
               >
                 Home
               </button>
@@ -101,6 +103,14 @@ const Navbar = (isHomepage) => {
                 Contact
               </button>
             </li>
+            <li>
+              <button
+                className="hover:text-black"
+                onClick={() => onClickPage("/pages/dashboards/crypto")}
+              >
+                Dashboards
+              </button>
+            </li>
           </ul>
 
           {/* Responsive Menu */}
@@ -114,7 +124,7 @@ const Navbar = (isHomepage) => {
                 <li>
                   <button
                     className="hover:text-black"
-                    onClick={() => onClickPage("/")}
+                    onClick={() => onClickPage("/home")}
                   >
                     Home
                   </button>

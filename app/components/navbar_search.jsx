@@ -39,7 +39,7 @@ const NavbarSearch = (isHomepage) => {
     >
       <div className="container mx-auto">
         <div className="flex items-center justify-between">
-          <button onClick={() => onClickPage("/")}>
+          <button onClick={() => onClickPage("/home")}>
             <div className="font-bold text-2xl pl-5 whitespace-nowrap">Event Hunt</div>
           </button>
 
@@ -69,7 +69,7 @@ const NavbarSearch = (isHomepage) => {
             <li>
               <button
                 className="hover:text-black"
-                onClick={() => onClickPage("/")}
+                onClick={() => onClickPage("/home")}
               >
                 Home
               </button>
@@ -111,7 +111,7 @@ const NavbarSearch = (isHomepage) => {
                 <li>
                   <button
                     className="hover:text-black"
-                    onClick={() => onClickPage("/")}
+                    onClick={() => onClickPage("/home")}
                   >
                     Home
                   </button>

@@ -2,7 +2,7 @@
 import React, { useState } from "react";
 import { useRouter } from "next/navigation";
 import { createUserWithEmailAndPassword } from "firebase/auth";
-import { auth } from "../firebaseConfig";
+import { auth } from "../../firebaseConfig";
 
 export default function Register() {
   const router = useRouter();
@@ -222,7 +222,7 @@ export default function Register() {
             <span>Already have an account? </span>
             <button
               className="text-sky-600"
-              onClick={() => onClickPage("/login")}
+              onClick={() => onClickPage("/authentication/login")}
             >
               Login
             </button>

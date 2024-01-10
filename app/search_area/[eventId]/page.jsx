@@ -18,9 +18,9 @@ import { db } from "../../firebaseConfig";
 import { ref, getDownloadURL, getStorage } from "firebase/storage";
 import Navbar from "../../components/navbar";
 import Footer from "../../components/footer";
-import { images } from "../../../../next.config";
-import { useAuth } from "@/app/components/authDetail";
-import UpdateEventForm from "@/app/update_page/page";
+import { images } from "../../../next.config";
+import { useAuth } from "../../components/authDetail";
+import UpdateEventForm from "../../api/update_page/page";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
 

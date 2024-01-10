@@ -2,7 +2,7 @@
 import React, { useState, useEffect } from "react";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
-import { db } from "@/app/firebaseConfig";
+import { db } from "../../firebaseConfig";
 import { getDocs, collection } from "firebase/firestore";
 import SearchButton from "../search_Button";
 import SearchFunction from "../search_Function";
