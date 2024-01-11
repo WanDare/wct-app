@@ -11,7 +11,6 @@ export default function Login() {
   };
 
   const [showPassword, setShowPassword] = useState(false);
-
   const togglePasswordVisibility = () => {
     setShowPassword(!showPassword);
   };
@@ -23,7 +22,15 @@ export default function Login() {
     e.preventDefault();
     signInWithEmailAndPassword(auth, email, password)
       .then((userCredential) => {
-        router.push("/home");
+        const user = userCredential.user;
+        // Check if the signed-in user is an admin
+        if (user && user.email === "aboy@gmail.com") {
+          // Redirect to the admin dashboard
+          router.push("/home");
+        } else {
+          // Redirect to the regular user dashboard
+          router.push("/home");
+        }
         console.log(userCredential);
       })
       .catch((error) => {

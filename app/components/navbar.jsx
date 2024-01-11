@@ -103,14 +103,6 @@ const Navbar = (isHomepage) => {
                 Contact
               </button>
             </li>
-            <li>
-              <button
-                className="hover:text-black"
-                onClick={() => onClickPage("/pages/dashboards/crypto")}
-              >
-                Dashboards
-              </button>
-            </li>
           </ul>
 
           {/* Responsive Menu */}

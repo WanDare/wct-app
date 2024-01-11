@@ -73,7 +73,16 @@ const AuthDetail = () => {
               className="dropdown-content z-[1] menu p-2 shadow bg-base-100 rounded-box w-52"
             >
               <p className="font-bold m-3">{authUser.email}</p>
-
+              {authUser.email === "aboy@gmail.com" && (
+                <li>
+                  <button
+                    className="hover:text-black"
+                    onClick={() => onClickPage("/post")}
+                  >
+                    Dashboards
+                  </button>
+                </li>
+              )}
               <li>
                 <button onClick={userSignOut}>Sign out</button>
               </li>
