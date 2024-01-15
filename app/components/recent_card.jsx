@@ -66,7 +66,7 @@ export default function Recentcard() {
           {events.map((event, index) => (
             <li key={index}>
               <div className="items-center gap-x-6">
-                <div className="relative w-full rounded-xl overflow-hidden group">
+                <div className="relative w-full rounded-xl shadow-lg overflow-hidden group">
                   <Image
                     src={event.imageUrl}
                     alt={`Image ${index + 1}`}
