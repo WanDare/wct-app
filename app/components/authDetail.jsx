@@ -77,7 +77,7 @@ const AuthDetail = () => {
                 <li>
                   <button
                     className="hover:text-black"
-                    onClick={() => onClickPage("/Layout")}
+                    onClick={() => onClickPage("/dashboard")}
                   >
                     Dashboards
                   </button>
