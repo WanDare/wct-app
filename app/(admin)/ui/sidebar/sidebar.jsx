@@ -9,6 +9,7 @@ import ViewQuiltIcon from "@mui/icons-material/ViewQuilt";
 import LoginIcon from "@mui/icons-material/Login";
 import LogoutIcon from "@mui/icons-material/Logout";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
+import Divider from "@mui/material/Divider";
 
 const Sidebar = () => {
   const router = useRouter();
@@ -72,6 +73,7 @@ const Sidebar = () => {
                 <span className="flex-1 ms-3 whitespace-nowrap">Table</span>
               </a>
             </li>
+            <Divider className="border-b border-gray-200 dark:border-gray-700" />
             <li>
               <a
                 onClick={() => onClickPage("/dashboard/profile")}
@@ -96,7 +98,7 @@ const Sidebar = () => {
                 className="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group"
               >
                 <LogoutIcon className="flex-shrink-0 w-5 h-5 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white" />
-                <span className="flex-1 ms-3 whitespace-nowrap">Sign Up</span>
+                <span className="flex-1 ms-3 whitespace-nowrap">Sign Out</span>
               </a>
             </li>
           </ul>
