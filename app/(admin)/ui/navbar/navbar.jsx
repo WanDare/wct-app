@@ -28,7 +28,7 @@ const Navbar = () => {
                 {/* Page content here */}
                 <label
                   htmlFor="my-drawer"
-                  className="btn btn-primary sm:hidden text-gray-500 bg-transparent border-none hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600 drawer-button"
+                  className="btn btn-primary lg:hidden text-gray-500 bg-transparent border-none hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600 drawer-button"
                 >
                   <svg
                     className="w-6 h-6"
@@ -114,7 +114,7 @@ const Navbar = () => {
                       </li>
                       <li>
                         <a
-                          href="#"
+                          onClick={() => onClickPage("/dashboard/table")}
                           className="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group"
                         >
                           <TableChartIcon className="flex-shrink-0 w-5 h-5 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white" />
