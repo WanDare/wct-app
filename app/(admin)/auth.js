@@ -1,60 +1,47 @@
-// import NextAuth from "next-auth";
-// import CredentialsProvider from "next-auth/providers/credentials";
-// import { authConfig } from "./authconfig";
-// import { connectToDB } from "./lib/utils";
-// import { User } from "./lib/models";
-// import bcrypt from "bcrypt";
+// import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
 
-// const login = async (credentials) => {
-//   try {
-//     connectToDB();
-//     const user = await User.findOne({ username: credentials.username });
-
-//     if (!user || !user.isAdmin) throw new Error("Wrong credentials!");
-
-//     const isPasswordCorrect = await bcrypt.compare(
-//       credentials.password,
-//       user.password
-//     );
-
-//     if (!isPasswordCorrect) throw new Error("Wrong credentials!");
-
-//     return user;
-//   } catch (err) {
-//     console.log(err);
-//     throw new Error("Failed to login!");
-//   }
-// };
-
-// export const { signIn, signOut, auth } = NextAuth({
-//   ...authConfig,
+// export default getAuth({
 //   providers: [
-//     CredentialsProvider({
-//       async authorize(credentials) {
+//     Providers.Credentials({
+//       name: "Credentials",
+//       credentials: {
+//         username: { label: "Username", type: "text" },
+//         password: { label: "Password", type: "password" },
+//       },
+//       authorize: async (credentials) => {
 //         try {
-//           const user = await login(credentials);
-//           return user;
-//         } catch (err) {
-//           return null;
+//           // Sign in with Firebase Authentication
+//           const auth = getAuth(firebase);
+//           const userCredential = await signInWithEmailAndPassword(
+//             auth,
+//             credentials.username,
+//             credentials.password
+//           );
+
+//           // If authentication is successful, check if the email is allowed
+//           const user = userCredential.user;
+//           const allowedEmail = "aboy@gmail.com";
+
+//           if (user.email === allowedEmail) {
+//             // If the email is allowed, return the user data
+//             return Promise.resolve({
+//               id: user.uid,
+//               name: user.displayName,
+//               email: user.email,
+//             });
+//           } else {
+//             // If the email is not allowed, return null
+//             console.error("Unauthorized email address");
+//             return Promise.resolve(null);
+//           }
+//         } catch (error) {
+//           // If authentication fails, return null
+//           console.error("Authentication error:", error.message);
+//           return Promise.resolve(null);
 //         }
 //       },
 //     }),
+//     // Add other providers if needed
 //   ],
-//   // ADD ADDITIONAL INFORMATION TO SESSION
-//   callbacks: {
-//     async jwt({ token, user }) {
-//       if (user) {
-//         token.username = user.username;
-//         token.img = user.img;
-//       }
-//       return token;
-//     },
-//     async session({ session, token }) {
-//       if (token) {
-//         session.user.username = token.username;
-//         session.user.img = token.img;
-//       }
-//       return session;
-//     },
-//   },
+//   // Add additional configuration as needed
 // });

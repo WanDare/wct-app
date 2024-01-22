@@ -1,19 +1,22 @@
-// export const authConfig = {
-//   providers:[],
-//   pages: {
-//     signIn: "/login",
-//   },
-//   callbacks: {
-//     authorized({ auth, request }) {
-//       const isLoggedIn = auth?.user;
-//       const isOnDashboard = request.nextUrl.pathname.startsWith("/dashboard");
-//       if (isOnDashboard) {
-//         if (isLoggedIn) return true;
-//         return false;
-//       } else if (isLoggedIn) {
-//         return Response.redirect(new URL("/dashboard", request.nextUrl));
-//       }
-//       return true;
-//     },
-//   },
+// // components/PrivateRoute.js
+// import { useSession } from "next-auth/react";
+// import { useRouter } from "next/router";
+// import { SessionProvider } from "next-auth/react";
+
+// const PrivateRoute = ({ children }) => {
+//   const { data: session, status } = useSession();
+//   const router = useRouter();
+
+//   if (status === "loading") {
+//     return <p>Loading...</p>;
+//   }
+
+//   if (!session) {
+//     router.replace("/authentication/login");
+//     return null;
+//   }
+
+//   return <>{children}</>;
 // };
+
+// export default PrivateRoute;

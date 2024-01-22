@@ -1,6 +1,6 @@
 import React from "react";
 
-const Chart = () => {
+const Chart1 = () => {
   return (
     <div class="w-full max-w-full px-3 mt-0 lg:w-7/12 lg:flex-none">
       <div class="relative z-20 flex flex-col min-w-0 break-words bg-white border-0 border-solid dark:bg-gray-950 border-black-125 shadow-soft-xl dark:shadow-soft-dark-xl rounded-2xl bg-clip-border">
@@ -21,4 +21,4 @@ const Chart = () => {
   );
 };
 
-export default Chart;
+export default Chart1;

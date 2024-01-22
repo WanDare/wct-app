@@ -26,7 +26,7 @@ export default function Login() {
         // Check if the signed-in user is an admin
         if (user && user.email === "aboy@gmail.com") {
           // Redirect to the admin dashboard
-          router.push("/home");
+          router.push("/dashboard");
         } else {
           // Redirect to the regular user dashboard
           router.push("/home");

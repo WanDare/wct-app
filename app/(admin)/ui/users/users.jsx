@@ -2,220 +2,362 @@ import React from "react";
 
 const UsersUi = () => {
   return (
-    <div class="relative flex flex-col w-full min-w-0 mb-0 break-words bg-white border-0 border-transparent border-solid shadow-soft-xl rounded-2xl bg-clip-border">
-      <div class="p-6 pb-0 mb-0 bg-white rounded-t-2xl">
-        <h6>Authors table</h6>
-      </div>
-      <div class="flex-auto px-0 pt-0 pb-2">
-        <div class="p-0 overflow-x-auto">
-          <table class="items-center w-full mb-0 align-top border-gray-200 text-slate-500">
-            <thead class="align-bottom">
-              <tr>
-                <th class="px-6 py-3 font-bold text-left uppercase align-middle bg-transparent border-b border-gray-200 shadow-none text-xxs border-b-solid tracking-none whitespace-nowrap text-slate-400 opacity-70">
-                  Author
-                </th>
-                <th class="px-6 py-3 pl-2 font-bold text-left uppercase align-middle bg-transparent border-b border-gray-200 shadow-none text-xxs border-b-solid tracking-none whitespace-nowrap text-slate-400 opacity-70">
-                  Function
-                </th>
-                <th class="px-6 py-3 font-bold text-center uppercase align-middle bg-transparent border-b border-gray-200 shadow-none text-xxs border-b-solid tracking-none whitespace-nowrap text-slate-400 opacity-70">
-                  Status
-                </th>
-                <th class="px-6 py-3 font-bold text-center uppercase align-middle bg-transparent border-b border-gray-200 shadow-none text-xxs border-b-solid tracking-none whitespace-nowrap text-slate-400 opacity-70">
-                  Employed
-                </th>
-                <th class="px-6 py-3 font-semibold capitalize align-middle bg-transparent border-b border-gray-200 border-solid shadow-none tracking-none whitespace-nowrap text-slate-400 opacity-70"></th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td class="p-2 align-middle bg-transparent border-b whitespace-nowrap shadow-transparent">
-                  <div class="flex px-2 py-1">
-                    <div>
-                      <img
-                        src="/images/user/user-01.png"
-                        class="inline-flex items-center justify-center mr-4 text-white transition-all duration-200 ease-soft-in-out text-sm h-9 w-9 rounded-xl"
-                        alt="user1"
-                      />
-                    </div>
-                    <div class="flex flex-col justify-center">
-                      <h6 class="mb-0 leading-normal text-sm">John Michael</h6>
-                      <p class="mb-0 leading-tight text-xs text-slate-400">
-                        john@creative-tim.com
-                      </p>
-                    </div>
-                  </div>
-                </td>
-                <td class="p-2 align-middle bg-transparent border-b whitespace-nowrap shadow-transparent">
-                  <p class="mb-0 font-semibold leading-tight text-xs">
-                    Manager
-                  </p>
-                  <p class="mb-0 leading-tight text-xs text-slate-400">
-                    Organization
-                  </p>
-                </td>
-                <td class="p-2 leading-normal text-center align-middle bg-transparent border-b text-sm whitespace-nowrap shadow-transparent">
-                  <span class="bg-gradient-to-tl from-green-600 to-lime-400 px-3.6 text-xs rounded-1.8 py-2.2 inline-block whitespace-nowrap text-center align-baseline font-bold uppercase leading-none text-white">
-                    Online
-                  </span>
-                </td>
-                <td class="p-2 text-center align-middle bg-transparent border-b whitespace-nowrap shadow-transparent">
-                  <span class="font-semibold leading-tight text-xs text-slate-400">
-                    23/04/18
-                  </span>
-                </td>
-                <td class="p-2 align-middle bg-transparent border-b whitespace-nowrap shadow-transparent">
+    <div className="pb-6">
+      <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
+        <div class="flex items-center justify-between flex-column p-4 flex-wrap md:flex-row space-y-4 md:space-y-0 pb-4 bg-white dark:bg-gray-900">
+          <div>
+            <button
+              id="dropdownActionButton"
+              data-dropdown-toggle="dropdownAction"
+              class="inline-flex items-center text-gray-500 bg-white border border-gray-300 focus:outline-none hover:bg-gray-100 focus:ring-4 focus:ring-gray-200 font-medium rounded-lg text-sm px-3 py-1.5 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-600 dark:focus:ring-gray-700"
+              type="button"
+            >
+              <span class="sr-only">Action button</span>
+              Action
+              <svg
+                class="w-2.5 h-2.5 ms-2.5"
+                aria-hidden="true"
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 10 6"
+              >
+                <path
+                  stroke="currentColor"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="m1 1 4 4 4-4"
+                />
+              </svg>
+            </button>
+            {/* <!-- Dropdown menu --> */}
+            <div
+              id="dropdownAction"
+              class="z-10 hidden bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700 dark:divide-gray-600"
+            >
+              <ul
+                class="py-1 text-sm text-gray-700 dark:text-gray-200"
+                aria-labelledby="dropdownActionButton"
+              >
+                <li>
                   <a
-                    href="javascript:;"
-                    class="font-semibold leading-tight text-xs text-slate-400"
+                    href="#"
+                    class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
                   >
-                    {" "}
-                    Edit{" "}
+                    Reward
                   </a>
-                </td>
-              </tr>
-              <tr>
-                <td class="p-2 align-middle bg-transparent border-b whitespace-nowrap shadow-transparent">
-                  <div class="flex px-2 py-1">
-                    <div>
-                      <img
-                        src="/images/user/user-02.png"
-                        class="inline-flex items-center justify-center mr-4 text-white transition-all duration-200 ease-soft-in-out text-sm h-9 w-9 rounded-xl"
-                        alt="user2"
-                      />
-                    </div>
-                    <div class="flex flex-col justify-center">
-                      <h6 class="mb-0 leading-normal text-sm">Alexa Liras</h6>
-                      <p class="mb-0 leading-tight text-xs text-slate-400">
-                        alexa@creative-tim.com
-                      </p>
-                    </div>
-                  </div>
-                </td>
-                <td class="p-2 align-middle bg-transparent border-b whitespace-nowrap shadow-transparent">
-                  <p class="mb-0 font-semibold leading-tight text-xs">
-                    Programator
-                  </p>
-                  <p class="mb-0 leading-tight text-xs text-slate-400">
-                    Developer
-                  </p>
-                </td>
-                <td class="p-2 leading-normal text-center align-middle bg-transparent border-b text-sm whitespace-nowrap shadow-transparent">
-                  <span class="bg-gradient-to-tl from-slate-600 to-slate-300 px-3.6 text-xs rounded-1.8 py-2.2 inline-block whitespace-nowrap text-center align-baseline font-bold uppercase leading-none text-white">
-                    Offline
-                  </span>
-                </td>
-                <td class="p-2 text-center align-middle bg-transparent border-b whitespace-nowrap shadow-transparent">
-                  <span class="font-semibold leading-tight text-xs text-slate-400">
-                    11/01/19
-                  </span>
-                </td>
-                <td class="p-2 align-middle bg-transparent border-b whitespace-nowrap shadow-transparent">
+                </li>
+                <li>
                   <a
-                    href="javascript:;"
-                    class="font-semibold leading-tight text-xs text-slate-400"
+                    href="#"
+                    class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
                   >
-                    {" "}
-                    Edit{" "}
+                    Promote
                   </a>
-                </td>
-              </tr>
-              <tr>
-                <td class="p-2 align-middle bg-transparent border-b whitespace-nowrap shadow-transparent">
-                  <div class="flex px-2 py-1">
-                    <div>
-                      <img
-                        src="/images/user/user-03.png"
-                        class="inline-flex items-center justify-center mr-4 text-white transition-all duration-200 ease-soft-in-out text-sm h-9 w-9 rounded-xl"
-                        alt="user3"
-                      />
-                    </div>
-                    <div class="flex flex-col justify-center">
-                      <h6 class="mb-0 leading-normal text-sm">
-                        Laurent Perrier
-                      </h6>
-                      <p class="mb-0 leading-tight text-xs text-slate-400">
-                        laurent@creative-tim.com
-                      </p>
-                    </div>
-                  </div>
-                </td>
-                <td class="p-2 align-middle bg-transparent border-b whitespace-nowrap shadow-transparent">
-                  <p class="mb-0 font-semibold leading-tight text-xs">
-                    Executive
-                  </p>
-                  <p class="mb-0 leading-tight text-xs text-slate-400">
-                    Projects
-                  </p>
-                </td>
-                <td class="p-2 leading-normal text-center align-middle bg-transparent border-b text-sm whitespace-nowrap shadow-transparent">
-                  <span class="bg-gradient-to-tl from-green-600 to-lime-400 px-3.6 text-xs rounded-1.8 py-2.2 inline-block whitespace-nowrap text-center align-baseline font-bold uppercase leading-none text-white">
-                    Online
-                  </span>
-                </td>
-                <td class="p-2 text-center align-middle bg-transparent border-b whitespace-nowrap shadow-transparent">
-                  <span class="font-semibold leading-tight text-xs text-slate-400">
-                    19/09/17
-                  </span>
-                </td>
-                <td class="p-2 align-middle bg-transparent border-b whitespace-nowrap shadow-transparent">
+                </li>
+                <li>
                   <a
-                    href="javascript:;"
-                    class="font-semibold leading-tight text-xs text-slate-400"
+                    href="#"
+                    class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
                   >
-                    {" "}
-                    Edit{" "}
+                    Activate account
                   </a>
-                </td>
-              </tr>
-              <tr>
-                <td class="p-2 align-middle bg-transparent border-b-0 whitespace-nowrap shadow-transparent">
-                  <div class="flex px-2 py-1">
-                    <div>
-                      <img
-                        src="/images/user/user-04.png"
-                        class="inline-flex items-center justify-center mr-4 text-white transition-all duration-200 ease-soft-in-out text-sm h-9 w-9 rounded-xl"
-                        alt="user6"
-                      />
-                    </div>
-                    <div class="flex flex-col justify-center">
-                      <h6 class="mb-0 leading-normal text-sm">Miriam Eric</h6>
-                      <p class="mb-0 leading-tight text-xs text-slate-400">
-                        miriam@creative-tim.com
-                      </p>
-                    </div>
-                  </div>
-                </td>
-                <td class="p-2 align-middle bg-transparent border-b-0 whitespace-nowrap shadow-transparent">
-                  <p class="mb-0 font-semibold leading-tight text-xs">
-                    Programtor
-                  </p>
-                  <p class="mb-0 leading-tight text-xs text-slate-400">
-                    Developer
-                  </p>
-                </td>
-                <td class="p-2 leading-normal text-center align-middle bg-transparent border-b-0 text-sm whitespace-nowrap shadow-transparent">
-                  <span class="bg-gradient-to-tl from-green-600 to-lime-400 px-3.6 text-xs rounded-1.8 py-2.2 inline-block whitespace-nowrap text-center align-baseline font-bold uppercase leading-none text-white">
-                    Online
-                  </span>
-                </td>
-                <td class="p-2 text-center align-middle bg-transparent border-b-0 whitespace-nowrap shadow-transparent">
-                  <span class="font-semibold leading-tight text-xs text-slate-400">
-                    14/09/20
-                  </span>
-                </td>
-                <td class="p-2 align-middle bg-transparent border-b-0 whitespace-nowrap shadow-transparent">
-                  <a
-                    href="javascript:;"
-                    class="font-semibold leading-tight text-xs text-slate-400"
-                  >
-                    {" "}
-                    Edit{" "}
-                  </a>
-                </td>
-              </tr>
-            </tbody>
-          </table>
+                </li>
+              </ul>
+              <div class="py-1">
+                <a
+                  href="#"
+                  class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white"
+                >
+                  Delete User
+                </a>
+              </div>
+            </div>
+          </div>
+          <label for="table-search" class="sr-only">
+            Search
+          </label>
+          <div class="relative">
+            <div class="absolute inset-y-0 rtl:inset-r-0 start-0 flex items-center ps-3 pointer-events-none">
+              <svg
+                class="w-4 h-4 text-gray-500 dark:text-gray-400"
+                aria-hidden="true"
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 20 20"
+              >
+                <path
+                  stroke="currentColor"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z"
+                />
+              </svg>
+            </div>
+            <input
+              type="text"
+              id="table-search-users"
+              class="block p-2 ps-10 text-sm text-gray-900 border border-gray-300 rounded-lg w-80 bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+              placeholder="Search for users"
+            />
+          </div>
         </div>
+        <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
+          <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+            <tr>
+              <th scope="col" class="p-4">
+                <div class="flex items-center">
+                  <input
+                    id="checkbox-all-search"
+                    type="checkbox"
+                    class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 dark:focus:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
+                  />
+                  <label for="checkbox-all-search" class="sr-only">
+                    checkbox
+                  </label>
+                </div>
+              </th>
+              <th scope="col" class="px-6 py-3">
+                Name
+              </th>
+              <th scope="col" class="px-6 py-3">
+                Position
+              </th>
+              <th scope="col" class="px-6 py-3">
+                Status
+              </th>
+              <th scope="col" class="px-6 py-3">
+                Action
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
+              <td class="w-4 p-4">
+                <div class="flex items-center">
+                  <input
+                    id="checkbox-table-search-1"
+                    type="checkbox"
+                    class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 dark:focus:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
+                  />
+                  <label for="checkbox-table-search-1" class="sr-only">
+                    checkbox
+                  </label>
+                </div>
+              </td>
+              <th
+                scope="row"
+                class="flex items-center px-6 py-4 text-gray-900 whitespace-nowrap dark:text-white"
+              >
+                <img
+                  class="w-10 h-10 rounded-full"
+                  src="/images/user/user-01.png"
+                  alt="Jese image"
+                />
+                <div class="ps-3">
+                  <div class="text-base font-semibold">Neil Sims</div>
+                  <div class="font-normal text-gray-500">
+                    neil.sims@flowbite.com
+                  </div>
+                </div>
+              </th>
+              <td class="px-6 py-4">React Developer</td>
+              <td class="px-6 py-4">
+                <div class="flex items-center">
+                  <div class="h-2.5 w-2.5 rounded-full bg-green-500 me-2"></div>{" "}
+                  Online
+                </div>
+              </td>
+              <td class="px-6 py-4">
+                <a
+                  href="#"
+                  class="font-medium text-blue-600 dark:text-blue-500 hover:underline"
+                >
+                  Edit user
+                </a>
+              </td>
+            </tr>
+            <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
+              <td class="w-4 p-4">
+                <div class="flex items-center">
+                  <input
+                    id="checkbox-table-search-2"
+                    type="checkbox"
+                    class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 dark:focus:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
+                  />
+                  <label for="checkbox-table-search-2" class="sr-only">
+                    checkbox
+                  </label>
+                </div>
+              </td>
+              <th
+                scope="row"
+                class="flex items-center px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
+              >
+                <img
+                  class="w-10 h-10 rounded-full"
+                  src="/images/user/user-02.png"
+                  alt="Jese image"
+                />
+                <div class="ps-3">
+                  <div class="text-base font-semibold">Bonnie Green</div>
+                  <div class="font-normal text-gray-500">
+                    bonnie@flowbite.com
+                  </div>
+                </div>
+              </th>
+              <td class="px-6 py-4">Designer</td>
+              <td class="px-6 py-4">
+                <div class="flex items-center">
+                  <div class="h-2.5 w-2.5 rounded-full bg-green-500 me-2"></div>{" "}
+                  Online
+                </div>
+              </td>
+              <td class="px-6 py-4">
+                <a
+                  href="#"
+                  class="font-medium text-blue-600 dark:text-blue-500 hover:underline"
+                >
+                  Edit user
+                </a>
+              </td>
+            </tr>
+            <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
+              <td class="w-4 p-4">
+                <div class="flex items-center">
+                  <input
+                    id="checkbox-table-search-2"
+                    type="checkbox"
+                    class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 dark:focus:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
+                  />
+                  <label for="checkbox-table-search-2" class="sr-only">
+                    checkbox
+                  </label>
+                </div>
+              </td>
+              <th
+                scope="row"
+                class="flex items-center px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
+              >
+                <img
+                  class="w-10 h-10 rounded-full"
+                  src="/images/user/user-03.png"
+                  alt="Jese image"
+                />
+                <div class="ps-3">
+                  <div class="text-base font-semibold">Jese Leos</div>
+                  <div class="font-normal text-gray-500">jese@flowbite.com</div>
+                </div>
+              </th>
+              <td class="px-6 py-4">Vue JS Developer</td>
+              <td class="px-6 py-4">
+                <div class="flex items-center">
+                  <div class="h-2.5 w-2.5 rounded-full bg-green-500 me-2"></div>{" "}
+                  Online
+                </div>
+              </td>
+              <td class="px-6 py-4">
+                <a
+                  href="#"
+                  class="font-medium text-blue-600 dark:text-blue-500 hover:underline"
+                >
+                  Edit user
+                </a>
+              </td>
+            </tr>
+            <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
+              <td class="w-4 p-4">
+                <div class="flex items-center">
+                  <input
+                    id="checkbox-table-search-2"
+                    type="checkbox"
+                    class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 dark:focus:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
+                  />
+                  <label for="checkbox-table-search-2" class="sr-only">
+                    checkbox
+                  </label>
+                </div>
+              </td>
+              <th
+                scope="row"
+                class="flex items-center px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
+              >
+                <img
+                  class="w-10 h-10 rounded-full"
+                  src="/images/user/user-04.png"
+                  alt="Jese image"
+                />
+                <div class="ps-3">
+                  <div class="text-base font-semibold">Thomas Lean</div>
+                  <div class="font-normal text-gray-500">
+                    thomes@flowbite.com
+                  </div>
+                </div>
+              </th>
+              <td class="px-6 py-4">UI/UX Engineer</td>
+              <td class="px-6 py-4">
+                <div class="flex items-center">
+                  <div class="h-2.5 w-2.5 rounded-full bg-green-500 me-2"></div>{" "}
+                  Online
+                </div>
+              </td>
+              <td class="px-6 py-4">
+                <a
+                  href="#"
+                  class="font-medium text-blue-600 dark:text-blue-500 hover:underline"
+                >
+                  Edit user
+                </a>
+              </td>
+            </tr>
+            <tr class="bg-white dark:bg-gray-800 hover:bg-gray-50 dark:hover:bg-gray-600">
+              <td class="w-4 p-4">
+                <div class="flex items-center">
+                  <input
+                    id="checkbox-table-search-3"
+                    type="checkbox"
+                    class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 dark:focus:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
+                  />
+                  <label for="checkbox-table-search-3" class="sr-only">
+                    checkbox
+                  </label>
+                </div>
+              </td>
+              <th
+                scope="row"
+                class="flex items-center px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
+              >
+                <img
+                  class="w-10 h-10 rounded-full"
+                  src="/images/user/user-05.png"
+                  alt="Jese image"
+                />
+                <div class="ps-3">
+                  <div class="text-base font-semibold">Leslie Livingston</div>
+                  <div class="font-normal text-gray-500">
+                    leslie@flowbite.com
+                  </div>
+                </div>
+              </th>
+              <td class="px-6 py-4">SEO Specialist</td>
+              <td class="px-6 py-4">
+                <div class="flex items-center">
+                  <div class="h-2.5 w-2.5 rounded-full bg-red-500 me-2"></div>{" "}
+                  Offline
+                </div>
+              </td>
+              <td class="px-6 py-4">
+                <a
+                  href="#"
+                  class="font-medium text-blue-600 dark:text-blue-500 hover:underline"
+                >
+                  Edit user
+                </a>
+              </td>
+            </tr>
+          </tbody>
+        </table>
       </div>
     </div>
   );
