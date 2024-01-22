@@ -63,7 +63,7 @@ const NavbarSearch = (isHomepage) => {
             aria-label="close sidebar"
             className="drawer-overlay"
           ></label>
-          <ul className="menu p-4 w-80 min-h-full bg-base-200 text-base-content font-bold">
+          <ul className="menu p-4 w-72 min-h-full bg-base-200 text-base-content font-bold">
             {/* Sidebar content here */}
             <h1 className="text-4xl p-4">Event Hunt</h1>
             <li>
