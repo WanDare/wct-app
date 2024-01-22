@@ -34,7 +34,7 @@ export default function Discovery() {
             </p>
           </div>
         </div>
-        <div data-aos="fade-up" data-aos-delay="100">
+        <div data-aos="fade-up" data-aos-delay="100" className="px-5">
           <Forum />
         </div>
       </div>
