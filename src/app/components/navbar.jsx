@@ -40,7 +40,7 @@ const Navbar = (isHomepage) => {
           {/* Page content here */}
           <label
             htmlFor="my-drawer"
-            className="btn btn-primary bg-transparent border-none hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-500 dark:hover:bg-gray-300 drawer-button"
+            className="btn btn-primary shadow-none bg-transparent border-none hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-500 dark:hover:bg-gray-300 drawer-button"
           >
             <svg
               className="w-6 h-6"
