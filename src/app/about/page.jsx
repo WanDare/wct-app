@@ -250,12 +250,12 @@ const About = () => {
           >
             <Image
               className="rounded-t-lg h-80 w-full bg-cover bg-center object-cover"
-              src="/images/srey.jpg"
+              src="/images/thary.jpg"
               alt=""
               width={"800"}
               height={"80"}
             />
-            <div className="py-5 rounded-b-lg">Phon Sreypherk</div>
+            <div className="py-5 rounded-b-lg">Neang Thary</div>
           </figure>
 
           <figure
