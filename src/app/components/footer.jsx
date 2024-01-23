@@ -8,7 +8,7 @@ const Footer = () => {
     router.push(pathname);
   };
   return (
-    <footer className="bg-white dark:bg-gray-900 mt-14">
+    <footer className="bg-white dark:bg-gray-900">
       <div className="mx-auto w-full py-6 lg:py-8">
         <div className="md:flex md:justify-between mx-auto w-full max-w-screen-2xl px-6">
           <div className="mb-6 md:mb-0 pr-20">

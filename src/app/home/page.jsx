@@ -156,7 +156,9 @@ export default function Home() {
           </div>
         </div>
       </div>
-      <Footer />
+      <div className="mt-14">
+        <Footer />
+      </div>
     </div>
   );
 }

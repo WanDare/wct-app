@@ -54,7 +54,9 @@ export default function Search() {
         <ResultArea numberOfResults={numberOfResults} />
       )}
       <ResultCard filteredEvents={filteredEvents} />
-      <Footer />
+      <div className="mt-14">
+        <Footer />
+      </div>
     </div>
   );
 }
