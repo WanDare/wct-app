@@ -1,9 +1,10 @@
 import React from "react";
+import CalendarComponent from "../../ui/calendar/calendar";
 
 export default function calendar() {
   return (
     <div>
-      <h1>Hello World</h1>
+      <CalendarComponent />
     </div>
   );
 }
