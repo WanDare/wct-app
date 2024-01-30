@@ -14,7 +14,7 @@ import CommentChart from "../charts/chartComment";
 const DashboardsUi = () => {
   return (
     <div className="">
-      <div className="flex flex-wrap gap-10 my-5">
+      <div className="flex flex-wrap gap-5 my-5">
         <LikeChart />
         <TinyBarChart />
         <ShareChart />

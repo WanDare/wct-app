@@ -19,6 +19,7 @@
     "@mui/icons-material": "^5.15.2",
     "@mui/material": "^5.15.2",
     "@mui/x-charts": "^6.19.1",
+    "@next-auth/firebase-adapter": "^2.0.1",
     "@react-jvectormap/core": "^1.0.4",
     "@react-jvectormap/unitedstates": "^1.0.1",
     "aos": "^2.3.4",
