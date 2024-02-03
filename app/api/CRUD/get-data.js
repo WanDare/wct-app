@@ -1,4 +1,4 @@
-import { db } from "../firebaseConfig";
+import { db } from "../../firebaseConfig";
 import { getDocs, collection, doc, getDoc } from "firebase/firestore";
 
 export async function fetchUserData() {

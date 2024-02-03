@@ -1,22 +1,35 @@
-// // components/PrivateRoute.js
-// import { useSession } from "next-auth/react";
-// import { useRouter } from "next/router";
-// import { SessionProvider } from "next-auth/react";
+"use client";
+import { useEffect } from "react";
+import { useRouter } from "next/navigation";
+import useAuth from "../hooks/auth";
 
-// const PrivateRoute = ({ children }) => {
-//   const { data: session, status } = useSession();
-//   const router = useRouter();
+const withAuth = (WrappedComponent) => {
+  return (props) => {
+    const router = useRouter();
+    const { user, loading } = useAuth(); // Implement this hook to get authentication status
 
-//   if (status === "loading") {
-//     return <p>Loading...</p>;
-//   }
+    useEffect(() => {
+      if (!loading && !user) {
+        router.replace("/authentication/login"); // Redirect to login if not authenticated
+      }
+    }, [loading, user, router]);
 
-//   if (!session) {
-//     router.replace("/authentication/login");
-//     return null;
-//   }
+    if (loading) {
+      // You can render a loading indicator here
+      return (
+        <span className="flex justify-center loading loading-spinner text-warning"></span>
+      );
+    }
 
-//   return <>{children}</>;
-// };
+    if (user) {
+      return <WrappedComponent {...props} />;
+    }
 
-// export default PrivateRoute;
+    // If not authenticated, you can redirect to login page or show a message
+    return (
+      <span className="flex justify-center loading loading-spinner text-warning"></span>
+    );
+  };
+};
+
+export default withAuth;

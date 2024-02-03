@@ -1,3 +1,5 @@
+"use client";
+import withAuth from "../authconfig";
 import Footer from "../ui/footer/page";
 import Navbar from "../ui/navbar/navbar";
 import Sidebar from "../ui/sidebar/sidebar";
@@ -15,4 +17,4 @@ const Layout = ({ children }) => {
   );
 };
 
-export default Layout;
+export default withAuth(Layout);
